@@ -48,11 +48,57 @@ npm install @monaco-editor/react framer-motion lucide-react clsx tailwind-merge
 
 # Step 5: Install development dependencies
 echo -e "\n${YELLOW}Step 5: Installing development dependencies...${NC}"
-npm install -D tailwindcss postcss autoprefixer eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-refresh prettier
+npm install -D tailwindcss@^3.3.6 postcss autoprefixer eslint@^9.30.0 @typescript-eslint/eslint-plugin@^8.35.1 @typescript-eslint/parser@^8.35.1 eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-refresh prettier
 
 # Step 6: Initialize Tailwind CSS
 echo -e "\n${YELLOW}Step 6: Setting up Tailwind CSS...${NC}"
-npx tailwindcss init -p
+
+# Create Tailwind config with ES module syntax (since package.json has "type": "module")
+cat > tailwind.config.js << 'EOF'
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        background: 'var(--background)',
+        surface: 'var(--surface)',
+        'surface-hover': 'var(--surface-hover)',
+        text: 'var(--text)',
+        'text-muted': 'var(--text-muted)',
+        'text-background': 'var(--text-background)',
+        accent: 'var(--accent)',
+        'accent-hover': 'var(--accent-hover)',
+        border: 'var(--border)',
+      },
+      fontFamily: {
+        sans: ['var(--font-family)', 'sans-serif'],
+      },
+      borderRadius: {
+        DEFAULT: 'var(--radius)',
+      },
+      boxShadow: {
+        theme: 'var(--shadow)',
+      },
+    },
+  },
+  plugins: [],
+}
+EOF
+
+# Create PostCSS config with ES module syntax
+cat > postcss.config.js << 'EOF'
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+EOF
 
 # Step 7: Update package.json with proper scripts and configuration
 echo -e "\n${YELLOW}Step 7: Updating package.json with scripts and dependencies...${NC}"
@@ -95,9 +141,9 @@ cat > package.json << 'EOF'
     "tailwindcss": "^3.3.6",
     "postcss": "^8.4.32",
     "autoprefixer": "^10.4.16",
-    "eslint": "^8.55.0",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
+    "eslint": "^9.30.0",
+    "@typescript-eslint/eslint-plugin": "^8.35.1",
+    "@typescript-eslint/parser": "^8.35.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
@@ -851,42 +897,7 @@ export const Layout = ({ children }: LayoutProps): JSX.Element => {
 }
 EOF
 
-# Update tailwind.config.js
-cat > tailwind.config.js << 'EOF'
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  darkMode: 'class',
-  theme: {
-    extend: {
-      colors: {
-        background: 'var(--background)',
-        surface: 'var(--surface)',
-        'surface-hover': 'var(--surface-hover)',
-        text: 'var(--text)',
-        'text-muted': 'var(--text-muted)',
-        'text-background': 'var(--text-background)',
-        accent: 'var(--accent)',
-        'accent-hover': 'var(--accent-hover)',
-        border: 'var(--border)',
-      },
-      fontFamily: {
-        sans: ['var(--font-family)', 'sans-serif'],
-      },
-      borderRadius: {
-        DEFAULT: 'var(--radius)',
-      },
-      boxShadow: {
-        theme: 'var(--shadow)',
-      },
-    },
-  },
-  plugins: [],
-}
-EOF
+# Tailwind config already created in Step 6
 
 # Create main.tsx with proper imports and error handling
 cat > src/main.tsx << 'EOF'

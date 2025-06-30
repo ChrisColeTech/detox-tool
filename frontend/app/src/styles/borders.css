@@ -1,0 +1,36 @@
+/* App Border System - Replaces Tailwind border utilities */
+
+.app-border {
+  border: var(--border-width) solid var(--border);
+}
+
+.app-border-t {
+  border-top: var(--border-width) solid var(--border);
+}
+
+.app-border-r {
+  border-right: var(--border-width) solid var(--border);
+}
+
+.app-border-b {
+  border-bottom: var(--border-width) solid var(--border);
+}
+
+.app-border-l {
+  border-left: var(--border-width) solid var(--border);
+}
+
+.app-border-x {
+  border-left: var(--border-width) solid var(--border);
+  border-right: var(--border-width) solid var(--border);
+}
+
+.app-border-y {
+  border-top: var(--border-width) solid var(--border);
+  border-bottom: var(--border-width) solid var(--border);
+}
+
+/* Border radius using theme variable */
+.app-rounded {
+  border-radius: var(--radius);
+}
