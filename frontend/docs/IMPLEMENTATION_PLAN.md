@@ -6,16 +6,49 @@ Based on comprehensive analysis of the task-writer reference implementation and 
 
 The detox-tool will implement a tab-based desktop application interface for JavaScript deobfuscation, following the exact architecture patterns from task-writer. The implementation will be broken down into **single-feature phases**, with each phase being fully completed before moving to the next.
 
-## 🎯 Style Guide Compliance (MANDATORY)
+## 🎯 Gold Standard Compliance (MANDATORY)
 
-**ALL phases MUST follow the style guide from `/mnt/c/projects/docs/STYLE_GUIDE.md`**
+**ALL phases MUST follow these gold standard documents:**
 
-### 🔒 Architectural Enforcement Rules
-- **Component Size Limits**: Page (100 lines), Feature (150 lines), Layout (80 lines), UI (100 lines)
-- **TypeScript Strict**: NO 'any' types allowed, comprehensive type coverage
-- **Theme Variables ONLY**: NO hardcoded colors, use `bg-surface`, `text-text`, `app-border`
-- **WCAG 2.1 AA**: Full accessibility compliance from day one
-- **Service Layer**: ALL business logic in services, components are declarative only
+### 📋 **Required Reference Documents**
+1. **Style Guide**: `/mnt/c/projects/docs/STYLE_GUIDE.md` (Theme system, accessibility, animations)
+2. **Layout Architecture**: `/mnt/c/projects/detox-tool/frontend/docs/LAYOUT_ARCHITECTURE_STANDARD.md` (Shell structure, component hierarchy)
+3. **Component Architecture**: `/mnt/c/projects/detox-tool/frontend/docs/COMPONENT_ARCHITECTURE_STANDARD.md` (Size limits, patterns, TypeScript)
+4. **Theme Reference**: `/mnt/c/projects/detox-tool/frontend/docs/THEMES_COMPLETE_REFERENCE.md` (48 theme variants)
+
+### 🚨 **MANDATORY Compliance Rules**
+- **Architecture Compliance**: EXACT component hierarchy from Layout Architecture Standard
+- **Component Size Limits**: Page (100), Feature (150), Layout (80), UI (100) lines
+- **Theme Variables ONLY**: NO hardcoded colors, use bg-surface, text-text, app-border
+- **Directory Structure**: EXACT folder structure from standards documents
+- **TypeScript Strict**: NO 'any' types, comprehensive interfaces
+
+### 🔒 Quality Gates (Before Each Phase)
+**EVERY phase must pass ALL quality gates before proceeding:**
+
+1. **📐 Architecture Compliance**:
+   - [ ] Component hierarchy matches Layout Architecture Standard EXACTLY
+   - [ ] Directory structure follows standards documents EXACTLY
+   - [ ] Component size limits respected (never exceeded)
+
+2. **🎨 Design Compliance**:
+   - [ ] ONLY theme variables used (no hardcoded colors)
+   - [ ] All 48 theme variants work perfectly
+   - [ ] Responsive design follows mobile-first approach
+
+3. **♿ Accessibility Compliance**:
+   - [ ] WCAG 2.1 AA standards met
+   - [ ] Full keyboard navigation implemented
+   - [ ] Screen reader support with ARIA labels
+
+4. **🔧 Code Quality**:
+   - [ ] TypeScript strict mode (no 'any' types)
+   - [ ] All business logic in services (not components)
+   - [ ] Comprehensive error handling implemented
+
+5. **🎭 Animation Compliance**:
+   - [ ] Reduced motion preferences respected
+   - [ ] Motion-safe classes used exclusively
 
 ### 🎨 Theme System Requirements
 - **ALL 48 theme variants** MUST work perfectly
@@ -32,7 +65,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 
 ## 📋 Phase Breakdown - Single Feature Implementation
 
-**Total Implementation Time**: 600 minutes (10 hours) across 20 focused phases  
+**Total Implementation Time**: 900 minutes (15 hours) across 30 focused phases  
 **Average Phase Duration**: 30 minutes  
 **Phase range**: 20-45 minutes each
 
@@ -43,8 +76,11 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Time Estimate**: 30 minutes
 
 **📋 Related Documentation:**
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Complete directory organization
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - TypeScript and build requirements
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Complete directory organization  
+- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Theme system, accessibility, animations
+- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - Desktop app shell structure
+- [Component Architecture Standard](COMPONENT_ARCHITECTURE_STANDARD.md) - Size limits, patterns, TypeScript
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Code patterns and examples
 
 **🎯 Single Feature**: Project scaffolding and build system
 
@@ -68,6 +104,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **📋 Related Documentation:**
 - [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - API type definitions
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Type organization
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - TypeScript patterns and interfaces
 
 **🎯 Single Feature**: Complete type system
 
@@ -91,6 +128,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **📋 Related Documentation:**
 - [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - Service implementation patterns
 - [Backend API Reference](../../backend/docs/API_REFERENCE.md) - API endpoints
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Service class patterns and dependency injection
 
 **🎯 Single Feature**: Service layer foundation
 
@@ -114,6 +152,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **📋 Related Documentation:**
 - [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - All theme definitions
 - [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Theme requirements
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Theme variable usage and enhanced effects
 
 **🎯 Single Feature**: Complete theming system
 
@@ -136,6 +175,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **📋 Related Documentation:**
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Layout component architecture
 - [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Semantic HTML requirements
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Semantic HTML and accessibility patterns
 
 **🎯 Single Feature**: Application layout shell
 
@@ -179,13 +219,16 @@ The detox-tool will implement a tab-based desktop application interface for Java
 
 **📋 Related Documentation:**
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Page component patterns
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Page and panel component patterns
 
 **🎯 Single Feature**: Page system foundation
 
 **🔧 Implementation Tasks:**
-- [ ] Create `/src/pages/WelcomePage.tsx` - Landing page with navigation config
-- [ ] Create `/src/pages/DeobfuscatorPage.tsx` - Main tool page stub
-- [ ] Create `/src/pages/SettingsPage.tsx` - Settings page stub
+- [ ] Create `/src/pages/WelcomePage.tsx` - Landing page with navigation config (root level)
+- [ ] Create `/src/pages/deobfuscator/DeobfuscatorPage.tsx` - Main tool page stub with panel
+- [ ] Create `/src/pages/deobfuscator/DeobfuscatorPanel.tsx` - Associated sidebar panel
+- [ ] Create `/src/pages/settings/SettingsPage.tsx` - Settings page stub with panel
+- [ ] Create `/src/pages/settings/SettingsPanel.tsx` - Associated settings panel
 - [ ] Each page exports proper navigationConfig
 - [ ] Verify auto-discovery picks up all pages
 
@@ -200,6 +243,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **📋 Related Documentation:**
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Tab system architecture
 - [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - State persistence patterns
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Custom hook patterns and state management
 
 **🎯 Single Feature**: Tab management
 
@@ -222,6 +266,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **📋 Related Documentation:**
 - [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - Settings patterns
 - [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - Theme selector
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Form patterns and settings components
 
 **🎯 Single Feature**: Settings management
 
@@ -243,6 +288,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **📋 Related Documentation:**
 - [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - FileService implementation
 - [Backend API Reference](../../backend/docs/API_REFERENCE.md) - File endpoints
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Service integration and error handling
 
 **🎯 Single Feature**: File management API integration
 
@@ -285,6 +331,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **📋 Related Documentation:**
 - [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - DeobfuscationService implementation
 - [Backend API Reference](../../backend/docs/API_REFERENCE.md) - Deobfuscation endpoints
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Deobfuscation service and custom hooks
 
 **🎯 Single Feature**: Deobfuscation API integration
 
@@ -347,6 +394,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **📋 Related Documentation:**
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Search architecture
 - [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Modal and search patterns
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Spotlight search and keyboard navigation
 
 **🎯 Single Feature**: Global search
 
@@ -387,6 +435,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 
 **📋 Related Documentation:**
 - [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Error handling requirements
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Error boundary patterns
 
 **🎯 Single Feature**: Error boundaries
 
@@ -407,6 +456,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 
 **📋 Related Documentation:**
 - [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Keyboard accessibility requirements
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Keyboard navigation patterns
 
 **🎯 Single Feature**: Keyboard shortcuts
 
@@ -441,9 +491,213 @@ The detox-tool will implement a tab-based desktop application interface for Java
 
 ---
 
-### Phase 20: Final Polish & Testing (QUALITY ASSURANCE)
-**Goal**: Final testing, polish, and production readiness  
+### Phase 20: Application Menu System (CORE FEATURE)
+**Goal**: Implement MenuButton and dropdown menu system  
+**Time Estimate**: 30 minutes
+
+**📋 Related Documentation:**
+- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - Menu system structure
+
+**🎯 Single Feature**: Application menu
+
+**🔧 Implementation Tasks:**
+- [ ] Create `/src/components/menu/MenuButton.tsx` - Main menu trigger
+- [ ] Create `/src/components/menu/DropdownMenu.tsx` - Menu container
+- [ ] Create `/src/components/menu/MenuItem.tsx` - Individual menu item
+- [ ] Create `/src/components/menu/Submenu.tsx` - Nested submenus
+- [ ] Add keyboard navigation for menu items
+
+**✅ Success Criteria**: Application menu functional, keyboard accessible, theme-aware
+
+---
+
+### Phase 21: Window Controls System (CORE FEATURE)
+**Goal**: Implement native window controls for Electron  
+**Time Estimate**: 25 minutes
+
+**📋 Related Documentation:**
+- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - Window controls
+
+**🎯 Single Feature**: Window controls
+
+**🔧 Implementation Tasks:**
+- [ ] Create `/src/components/titlebar/WindowControls.tsx` - Control container
+- [ ] Implement minimize, maximize, close buttons
+- [ ] Add platform-specific behavior (Windows/Mac/Linux)
+- [ ] Integrate with Electron window management APIs
+- [ ] Add hover states and accessibility
+
+**✅ Success Criteria**: Window controls work on all platforms, proper styling
+
+---
+
+### Phase 22: App Controls System (CORE FEATURE)
+**Goal**: Theme toggle, sidebar position, search button  
+**Time Estimate**: 30 minutes
+
+**📋 Related Documentation:**
+- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - App controls
+- [Theme Reference](THEMES_COMPLETE_REFERENCE.md) - Theme switching
+
+**🎯 Single Feature**: Application controls
+
+**🔧 Implementation Tasks:**
+- [ ] Create `/src/components/titlebar/AppControls.tsx` - Controls container
+- [ ] Implement theme toggle with all 48 variants
+- [ ] Add sidebar position toggle (left/right)
+- [ ] Create search button for spotlight search
+- [ ] Add tooltips and keyboard shortcuts
+
+**✅ Success Criteria**: All app controls functional, theme switching works instantly
+
+---
+
+### Phase 23: TabBar Drag & Drop System (CORE FEATURE)
+**Goal**: Advanced tab reordering with drag and drop  
+**Time Estimate**: 40 minutes
+
+**📋 Related Documentation:**
+- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - TabBar system
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Tab drag & drop patterns
+
+**🎯 Single Feature**: Tab drag and drop
+
+**🔧 Implementation Tasks:**
+- [ ] Install and configure @dnd-kit/core for drag & drop
+- [ ] Create `/src/hooks/useTabBarDragDrop.ts` - Drag logic
+- [ ] Create `/src/hooks/useTabBarScroll.ts` - Scroll management
+- [ ] Implement visual drag overlay
+- [ ] Add scroll controls for tab overflow
+
+**✅ Success Criteria**: Tabs can be reordered by dragging, smooth animations
+
+---
+
+### Phase 24: Sidebar Toggle System (CORE FEATURE)
+**Goal**: Collapsible sidebar with expand/collapse  
+**Time Estimate**: 25 minutes
+
+**📋 Related Documentation:**
+- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - Sidebar system
+
+**🎯 Single Feature**: Sidebar collapse
+
+**🔧 Implementation Tasks:**
+- [ ] Create `/src/components/sidebar/CollapseButton.tsx` - Toggle button
+- [ ] Implement smooth expand/collapse animations
+- [ ] Add keyboard shortcut for toggle
+- [ ] Preserve state across sessions
+- [ ] Update main content area layout
+
+**✅ Success Criteria**: Sidebar collapses smoothly, state persisted
+
+---
+
+### Phase 25: Navigation Context Menu (CORE FEATURE)
+**Goal**: Right-click menu for navigation items  
+**Time Estimate**: 30 minutes
+
+**📋 Related Documentation:**
+- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - NavItem system
+
+**🎯 Single Feature**: Navigation context menu
+
+**🔧 Implementation Tasks:**
+- [ ] Add context menu to `/src/components/sidebar/NavItem.tsx`
+- [ ] Implement visibility toggle (show/hide nav items)
+- [ ] Add pin/unpin functionality
+- [ ] Create context menu positioning logic
+- [ ] Save preferences to settings
+
+**✅ Success Criteria**: Context menu works, visibility/pin state persisted
+
+---
+
+### Phase 26: Dynamic Side Panel System (CORE FEATURE)
+**Goal**: Auto-loading contextual panels per page  
 **Time Estimate**: 35 minutes
+
+**📋 Related Documentation:**
+- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - SidePanel system
+
+**🎯 Single Feature**: Dynamic panel loading
+
+**🔧 Implementation Tasks:**
+- [ ] Enhance `/src/config/navigationConfig.tsx` with panel detection
+- [ ] Create panel component auto-discovery system
+- [ ] Implement smooth panel transitions
+- [ ] Add panel-specific error boundaries
+- [ ] Create panel resize functionality
+
+**✅ Success Criteria**: Panels load automatically per page, smooth transitions
+
+---
+
+### Phase 27: File Tree Explorer (DETOX-TOOL FEATURE)
+**Goal**: File browser for project exploration  
+**Time Estimate**: 40 minutes
+
+**📋 Related Documentation:**
+- [Component Architecture Standard](COMPONENT_ARCHITECTURE_STANDARD.md) - Feature components
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Platform integration patterns
+
+**🎯 Single Feature**: File tree explorer
+
+**🔧 Implementation Tasks:**
+- [ ] Create `/src/components/features/file-explorer/FileTree.tsx`
+- [ ] Implement directory browsing and file selection
+- [ ] Add file type icons and syntax detection
+- [ ] Create file context menu (open, analyze, export)
+- [ ] Integrate with deobfuscation workflow
+
+**✅ Success Criteria**: File tree functional, integrates with main workflow
+
+---
+
+### Phase 28: Results Comparison System (DETOX-TOOL FEATURE)
+**Goal**: Before/after code comparison  
+**Time Estimate**: 35 minutes
+
+**📋 Related Documentation:**
+- [Component Architecture Standard](COMPONENT_ARCHITECTURE_STANDARD.md) - Feature components
+- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Component composition patterns
+
+**🎯 Single Feature**: Code comparison
+
+**🔧 Implementation Tasks:**
+- [ ] Create `/src/components/features/comparison/CodeComparison.tsx`
+- [ ] Implement side-by-side diff view
+- [ ] Add syntax highlighting for differences
+- [ ] Create comparison export functionality
+- [ ] Add statistics (complexity reduction, size changes)
+
+**✅ Success Criteria**: Comparison view works, exports properly
+
+---
+
+### Phase 29: Security Analysis Panel (DETOX-TOOL FEATURE)
+**Goal**: Security scanning and vulnerability detection  
+**Time Estimate**: 35 minutes
+
+**📋 Related Documentation:**
+- [Frontend API Guide](FRONTEND_API_GUIDE.md) - Security API integration
+
+**🎯 Single Feature**: Security analysis
+
+**🔧 Implementation Tasks:**
+- [ ] Create `/src/components/features/security/SecurityAnalysis.tsx`
+- [ ] Implement vulnerability scanning UI
+- [ ] Add threat level indicators and warnings
+- [ ] Create security report export
+- [ ] Integrate with backend security analysis APIs
+
+**✅ Success Criteria**: Security analysis functional, reports generated
+
+---
+
+### Phase 30: Final Polish & Testing (QUALITY ASSURANCE)
+**Goal**: Final testing, polish, and production readiness  
+**Time Estimate**: 40 minutes
 
 **📋 Related Documentation:**
 - [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Quality requirements
@@ -456,6 +710,7 @@ The detox-tool will implement a tab-based desktop application interface for Java
 - [ ] Verify all API integrations work correctly
 - [ ] Test error handling and recovery scenarios
 - [ ] Final build verification and optimization
+- [ ] Test all new features (menu, window controls, drag & drop)
 
 **✅ Success Criteria**: 100% accessibility compliance, all features work, production ready
 
@@ -468,6 +723,9 @@ Each phase implements **exactly one feature or capability**:
 - ✅ Phase 4: Theme system only
 - ✅ Phase 8: Tab management only  
 - ✅ Phase 12: Deobfuscation API only
+- ✅ Phase 20: Application menu only
+- ✅ Phase 23: Tab drag & drop only
+- ✅ Phase 27: File tree explorer only
 - ❌ Never combine unrelated features in one phase
 
 ### Component Size Limits (ENFORCED)
@@ -499,7 +757,10 @@ Each phase must achieve 100% of its success criteria before proceeding:
 - **Core Feature Phases (4-9)**: Theme system, layout, navigation, tabs, settings
 - **API Integration Phases (10, 12, 14)**: Backend integration working
 - **Feature UI Phases (11, 13, 15-16)**: User interfaces complete
-- **Quality Phases (17-20)**: Error handling, shortcuts, optimization, polish
+- **Quality Phases (17-19)**: Error handling, shortcuts, optimization
+- **Desktop App Phases (20-26)**: Menu, window controls, advanced tab features, sidebar features
+- **Detox-Tool Phases (27-29)**: File explorer, comparison, security analysis
+- **Final Phase (30)**: Complete testing and production readiness
 
 ### Overall Success Criteria
 - ✅ All 48 theme variants functional
