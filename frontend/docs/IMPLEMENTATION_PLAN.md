@@ -8,8 +8,13 @@ The detox-tool will implement a tab-based desktop application interface for Java
 
 ## 📋 Phase Breakdown
 
+**Total Implementation Time**: 1,200 minutes (20 hours) across 8 focused phases  
+**Average Phase Duration**: 150 minutes (2.5 hours)  
+**No phase exceeds**: 180 minutes (3 hours)
+
 ### Phase 1: Foundation & Architecture (PRIORITY 1)
-**Goal**: Establish working layout shell with basic navigation
+**Goal**: Establish working layout shell with basic navigation  
+**Time Estimate**: 180 minutes (3 hours)
 
 #### 1.1 Project Structure Setup
 - [ ] Delete current `/src` folder completely
@@ -53,7 +58,8 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Success Criteria**: Services are instantiated, navigation discovery works, types are defined
 
 ### Phase 2: Layout Shell (PRIORITY 1)
-**Goal**: Working layout with title bar, sidebar, and main content area
+**Goal**: Working layout with title bar, sidebar, and main content area  
+**Time Estimate**: 150 minutes (2.5 hours)
 
 #### 2.1 Custom Hooks for State Management
 - [ ] Create `/src/hooks/useLayoutState.ts` - Layout state orchestration
@@ -104,7 +110,8 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Success Criteria**: App loads with working layout, tabs work, sidebar navigation works, pages render
 
 ### Phase 3: Tab System (PRIORITY 2)
-**Goal**: Complete tab management with drag & drop, persistence, and controls
+**Goal**: Complete tab management with drag & drop, persistence, and controls  
+**Time Estimate**: 120 minutes (2 hours)
 
 #### 3.1 Tab Bar Implementation  
 - [ ] Create `/src/components/features/tabbar/TabBarScrollable.tsx` - Scrollable tab container
@@ -127,7 +134,8 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Success Criteria**: Tabs can be opened, closed, reordered, persist across sessions
 
 ### Phase 4: Theming System (PRIORITY 2)
-**Goal**: Complete 12-color scheme theming with dual-dimension support
+**Goal**: Complete 12-color scheme theming with dual-dimension support  
+**Time Estimate**: 180 minutes (3 hours)
 
 #### 4.1 Color Scheme Implementation
 - [ ] Create `/src/styles/themes.css` - All 12 detox-tool specific color schemes
@@ -156,7 +164,8 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Success Criteria**: All 48 theme variants work, settings allow theme customization, themes persist
 
 ### Phase 5: Deobfuscation Core (PRIORITY 3)
-**Goal**: Main deobfuscation tool interface with Monaco editor integration
+**Goal**: Main deobfuscation tool interface with Monaco editor integration  
+**Time Estimate**: 180 minutes (3 hours)
 
 #### 5.1 Monaco Editor Integration
 - [ ] Install and configure Monaco Editor for React
@@ -185,7 +194,8 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Success Criteria**: Files can be loaded, edited in Monaco, deobfuscated, and results displayed
 
 ### Phase 6: Search System (PRIORITY 3)
-**Goal**: Global spotlight search across files and features
+**Goal**: Global spotlight search across files and features  
+**Time Estimate**: 90 minutes (1.5 hours)
 
 #### 6.1 Search Infrastructure
 - [ ] Create `/src/components/features/search/SpotlightSearch.tsx` - Main search component
@@ -214,7 +224,8 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Success Criteria**: Ctrl+K opens search, can search navigation/commands, results navigate properly
 
 ### Phase 7: Settings System (PRIORITY 4)
-**Goal**: Complete settings interface with all customization options
+**Goal**: Complete settings interface with all customization options  
+**Time Estimate**: 120 minutes (2 hours)
 
 #### 7.1 Settings UI Implementation
 - [ ] Create `/src/components/features/settings/Settings.tsx` - Main settings component
@@ -237,7 +248,8 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Success Criteria**: All settings can be configured, persist across sessions, UI is polished
 
 ### Phase 8: Advanced Features (PRIORITY 4)
-**Goal**: Polish features and advanced functionality
+**Goal**: Polish features and advanced functionality  
+**Time Estimate**: 180 minutes (3 hours)
 
 #### 8.1 Keyboard Shortcuts System
 - [ ] Create `/src/hooks/useKeyboardShortcuts.ts` - Global shortcuts management
