@@ -130,52 +130,18 @@ Current Status:
 - Strict typing for navigation, panels, settings, themes
 - Platform abstraction types for Electron/browser compatibility
 
-### Target Directory Structure (Post-CLI Scaffolding)
-```
-frontend/app/src/
-├── App.tsx                           # Root component with error boundaries
-├── main.tsx                          # Entry point
-├── vite-env.d.ts                     # Vite environment types
-├── components/
-│   ├── features/                     # Feature-specific components (MAX 150 lines)
-│   │   ├── deobfuscator/            # Main tool functionality
-│   │   ├── editor/                   # Monaco editor integration
-│   │   ├── file-explorer/           # File management
-│   │   ├── settings/                # Settings interface
-│   │   ├── search/                  # Global spotlight search
-│   │   ├── tabbar/                  # Tab management UI
-│   │   ├── titlebar/                # Title bar controls
-│   │   ├── sidebar/                 # Sidebar navigation
-│   │   ├── notifications/           # Toast notifications
-│   │   └── welcome/                 # Welcome page components
-│   ├── layout/                      # Layout orchestration (MAX 80 lines)
-│   │   ├── Layout.tsx               # Main layout orchestrator
-│   │   ├── TitleBar.tsx             # Title bar with tabs and controls
-│   │   ├── Sidebar.tsx              # Sidebar navigation container
-│   │   ├── MainContent.tsx          # Main content area router
-│   │   └── StatusBar.tsx            # Bottom status bar
-│   ├── shared/                      # Cross-feature components (MAX 150 lines)
-│   │   ├── forms/                   # Form components
-│   │   └── generators/              # Shared deobfuscation components
-│   └── ui/                         # Pure UI components (MAX 100 lines)
-├── hooks/                          # Custom React hooks (16 total)
-├── services/                       # Business logic services (12 total)
-├── pages/                          # Page components with nav config
-│   ├── WelcomePage.tsx              # Welcome/landing page
-│   ├── DeobfuscatorPage.tsx         # Main deobfuscation tool
-│   ├── SettingsPage.tsx             # Application settings
-│   ├── HelpPage.tsx                 # Help documentation
-│   ├── AboutPage.tsx                # About information
-│   └── panels/                      # Optional sidebar panels
-│       ├── DeobfuscatorPanel.tsx    # Deobfuscator tools panel
-│       ├── FileExplorerPanel.tsx    # File browser panel
-│       └── SettingsPanel.tsx        # Quick settings panel
-├── config/                         # Configuration files (4 total)
-├── types/                          # TypeScript definitions (10 total)
-├── styles/                         # CSS and theming (6 files)
-├── utils/                          # Helper functions (7 utilities)
-└── assets/                         # Static assets
-```
+### Project Architecture
+
+For complete directory structure and component organization details, see:
+- **[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)** - Complete architecture with 50+ components, services, and file organization
+- **[IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md)** - Detailed 8-phase implementation roadmap with architectural enforcement
+
+**Architecture Summary:**
+- **50+ Components**: Organized by feature domains with strict size limits
+- **12 Services**: Clean business logic separation with dependency injection  
+- **16 Custom Hooks**: State management and coordination
+- **10 Type Files**: Comprehensive TypeScript coverage
+- **48 Theme Variants**: 12 color schemes × 4 mode combinations
 
 ## 🔥 Architectural Enforcement Rules
 
