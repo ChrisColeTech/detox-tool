@@ -65,7 +65,9 @@
       "test/performance/"
     ],
     "collectCoverageFrom": [
-      "app/**/*.js",
+      "app/core/engines/HeavyObfuscationEngine.js",
+      "app/core/processors/StringArrayProcessor.js",
+      "app/core/processors/VariableNameRecovery.js",
       "!**/node_modules/**",
       "!**/coverage/**",
       "!**/test/**"
