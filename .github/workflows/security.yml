@@ -24,21 +24,30 @@ jobs:
         node-version: '18'
     
     - name: Run npm audit (backend)
+      working-directory: backend
       run: |
         npm audit --audit-level moderate
         npm audit fix --force || true
     
     - name: Run npm audit (frontend)
-      working-directory: frontend/app
       run: |
-        npm ci
-        npm audit --audit-level moderate
-        npm audit fix --force || true
+        if [ -d "frontend/app" ]; then
+          cd frontend/app
+          npm ci
+          npm audit --audit-level moderate
+          npm audit fix --force || true
+        else
+          echo "Frontend not yet implemented - skipping frontend security scan"
+        fi
     
     - name: Check for security updates
       run: |
-        npx npm-check-updates --target minor
-        cd frontend/app && npx npm-check-updates --target minor
+        cd backend && npx npm-check-updates --target minor
+        if [ -d "frontend/app" ]; then
+          cd frontend/app && npx npm-check-updates --target minor
+        else
+          echo "Frontend not yet implemented - skipping frontend update check"
+        fi
 
   # CodeQL security analysis
   codeql:
@@ -68,16 +77,25 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
+        cache-dependency-path: backend/package.json
     
     - name: Install dependencies
       run: |
-        npm ci
-        cd frontend/app && npm ci
+        cd backend && npm ci
+        if [ -d "frontend/app" ]; then
+          cd frontend/app && npm ci
+        else
+          echo "Frontend not yet implemented - skipping frontend dependencies"
+        fi
     
     - name: Build project
       run: |
-        npm run build:backend || true
-        cd frontend/app && npm run build
+        npm run build:backend || echo "Backend build not yet configured"
+        if [ -d "frontend/app" ]; then
+          cd frontend/app && npm run build
+        else
+          echo "Frontend not yet implemented - skipping frontend build"
+        fi
     
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
@@ -125,25 +143,34 @@ jobs:
       run: npm install -g license-checker
     
     - name: Check backend licenses
+      working-directory: backend
       run: |
         npm ci
         license-checker --summary --onlyAllow "MIT;ISC;BSD;Apache-2.0;CC0-1.0;Unlicense" || true
     
     - name: Check frontend licenses
-      working-directory: frontend/app
       run: |
-        npm ci
-        license-checker --summary --onlyAllow "MIT;ISC;BSD;Apache-2.0;CC0-1.0;Unlicense" || true
+        if [ -d "frontend/app" ]; then
+          cd frontend/app
+          npm ci
+          license-checker --summary --onlyAllow "MIT;ISC;BSD;Apache-2.0;CC0-1.0;Unlicense" || true
+        else
+          echo "Frontend not yet implemented - skipping frontend license check"
+        fi
     
     - name: Generate license report
       run: |
         echo "## License Report" > license-report.md
         echo "" >> license-report.md
         echo "### Backend Dependencies" >> license-report.md
-        license-checker --markdown >> license-report.md
+        cd backend && license-checker --markdown >> ../license-report.md
         echo "" >> license-report.md
         echo "### Frontend Dependencies" >> license-report.md
-        cd frontend/app && license-checker --markdown >> ../../license-report.md
+        if [ -d "frontend/app" ]; then
+          cd frontend/app && license-checker --markdown >> ../../license-report.md
+        else
+          echo "Frontend not yet implemented" >> license-report.md
+        fi
     
     - name: Upload license report
       uses: actions/upload-artifact@v4
@@ -183,16 +210,23 @@ jobs:
     - name: Install ESLint security plugin
       run: |
         npm install -g eslint eslint-plugin-security
-        cd frontend/app && npm ci
+        if [ -d "frontend/app" ]; then
+          cd frontend/app && npm ci
+        else
+          echo "Frontend not yet implemented - skipping frontend ESLint installation"
+        fi
     
     - name: Run security linting (backend)
       run: |
-        npx eslint . --ext .js,.ts --config .eslintrc.security.js || true
+        npx eslint . --ext .js,.ts --config .eslintrc.security.js || echo "ESLint security config not yet implemented"
     
     - name: Run security linting (frontend)
-      working-directory: frontend/app
       run: |
-        npm run lint || true
+        if [ -d "frontend/app" ]; then
+          cd frontend/app && npm run lint || true
+        else
+          echo "Frontend not yet implemented - skipping frontend security linting"
+        fi
     
     - name: Run Semgrep SAST
       uses: semgrep/semgrep-action@v1
