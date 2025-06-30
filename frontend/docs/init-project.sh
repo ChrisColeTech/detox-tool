@@ -48,7 +48,7 @@ npm install @monaco-editor/react framer-motion lucide-react clsx tailwind-merge
 
 # Step 5: Install development dependencies
 echo -e "\n${YELLOW}Step 5: Installing development dependencies...${NC}"
-npm install -D tailwindcss@^3.3.6 postcss autoprefixer eslint@^9.30.0 @typescript-eslint/eslint-plugin@^8.35.1 @typescript-eslint/parser@^8.35.1 eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-refresh prettier
+npm install -D tailwindcss@^3.3.6 postcss autoprefixer eslint@^8.57.0 @typescript-eslint/eslint-plugin@^6.21.0 @typescript-eslint/parser@^6.21.0 eslint-plugin-react-hooks eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-refresh prettier
 
 # Step 6: Initialize Tailwind CSS
 echo -e "\n${YELLOW}Step 6: Setting up Tailwind CSS...${NC}"
@@ -141,9 +141,9 @@ cat > package.json << 'EOF'
     "tailwindcss": "^3.3.6",
     "postcss": "^8.4.32",
     "autoprefixer": "^10.4.16",
-    "eslint": "^9.30.0",
-    "@typescript-eslint/eslint-plugin": "^8.35.1",
-    "@typescript-eslint/parser": "^8.35.1",
+    "eslint": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.33.2",
