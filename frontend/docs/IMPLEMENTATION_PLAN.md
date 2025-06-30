@@ -271,52 +271,14 @@ The detox-tool will implement a tab-based desktop application interface for Java
 
 ## 🛠️ Technical Implementation Details
 
-### Directory Structure (Target)
-```
-frontend/app/src/
-├── App.tsx                           # Root component with error boundaries
-├── main.tsx                          # Entry point
-├── vite-env.d.ts                     # Vite environment types
-├── components/
-│   ├── features/                     # Feature-specific components
-│   │   ├── deobfuscator/            # Main tool functionality
-│   │   ├── editor/                   # Monaco editor integration
-│   │   ├── file-explorer/           # File management
-│   │   ├── settings/                # Settings interface
-│   │   ├── search/                  # Global spotlight search
-│   │   ├── tabbar/                  # Tab management UI
-│   │   ├── titlebar/                # Title bar controls
-│   │   ├── sidebar/                 # Sidebar navigation
-│   │   ├── notifications/           # Toast notifications
-│   │   └── welcome/                 # Welcome page components
-│   ├── layout/                      # Layout orchestration
-│   │   ├── Layout.tsx               # Main layout orchestrator (< 80 lines)
-│   │   ├── TitleBar.tsx             # Title bar with tabs and controls
-│   │   ├── Sidebar.tsx              # Sidebar navigation container
-│   │   ├── MainContent.tsx          # Main content area router
-│   │   └── StatusBar.tsx            # Bottom status bar
-│   ├── shared/                      # Cross-feature components
-│   │   ├── forms/                   # Form components
-│   │   └── generators/              # Shared deobfuscation components
-│   └── ui/                         # Pure UI components
-├── hooks/                          # Custom React hooks (16 total)
-├── services/                       # Business logic services (10 total)
-├── pages/                          # Page components with nav config
-│   ├── WelcomePage.tsx              # Welcome/landing page
-│   ├── DeobfuscatorPage.tsx         # Main deobfuscation tool
-│   ├── SettingsPage.tsx             # Application settings
-│   ├── HelpPage.tsx                 # Help documentation
-│   ├── AboutPage.tsx                # About information
-│   └── panels/                      # Optional sidebar panels
-│       ├── DeobfuscatorPanel.tsx    # Deobfuscator tools panel
-│       ├── FileExplorerPanel.tsx    # File browser panel
-│       └── SettingsPanel.tsx        # Quick settings panel
-├── config/                         # Configuration files (4 total)
-├── types/                          # TypeScript definitions (10 total)
-├── styles/                         # CSS and theming (6 files)
-├── utils/                          # Helper functions (7 utilities)
-└── assets/                         # Static assets
-```
+### Directory Structure & Architecture
+
+For complete directory structure details, see **[PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md)** which provides:
+- Complete file and directory organization
+- Component architecture with size limits
+- Service layer structure with dependency injection patterns
+- Type system organization
+- Style and theming file structure
 
 ### Key Architecture Patterns
 
