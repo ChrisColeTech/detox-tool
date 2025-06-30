@@ -125,8 +125,8 @@ temp/
 /user-data/
 /cache/
 
-# Package manager files
-package-lock.json
+# Package manager files  
+# Note: package-lock.json should be committed for reproducible builds
 yarn.lock
 pnpm-lock.yaml
 
