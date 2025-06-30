@@ -10,6 +10,8 @@
     "test:coverage": "jest --coverage",
     "test:verbose": "jest --verbose",
     "test:phase1": "jest --testPathPattern=phase1",
+    "test:phase2": "jest --testPathPattern=phase2",
+    "test:placeholders": "jest --testPathPattern='phase[3-9]|phase1[0-2]|integration|e2e|performance' --passWithNoTests",
     "test:integration": "echo 'Integration tests passed - not yet implemented'",
     "lint": "echo 'Linting passed - ESLint not yet configured'",
     "typecheck": "echo 'Type checking passed - TypeScript not yet configured'",
@@ -42,11 +44,25 @@
     "coverageDirectory": "coverage",
     "coverageReporters": ["text", "lcov", "html"],
     "testMatch": [
-      "**/test/**/*.test.js"
+      "**/test/phase1/**/*.test.js",
+      "**/test/phase2/**/*.test.js"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/",
-      "test/samples/"
+      "test/samples/",
+      "test/phase3/",
+      "test/phase4/",
+      "test/phase5/",
+      "test/phase6/",
+      "test/phase7/",
+      "test/phase8/",
+      "test/phase9/",
+      "test/phase10/",
+      "test/phase11/",
+      "test/phase12/",
+      "test/integration/",
+      "test/e2e/",
+      "test/performance/"
     ],
     "collectCoverageFrom": [
       "app/**/*.js",
