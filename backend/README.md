@@ -42,20 +42,6 @@ npm test -- test/phase2/
 
 ## Project Structure
 
-```
-backend/
-├── app/                    # Application code
-│   ├── api/               # API interfaces
-│   ├── core/              # Core deobfuscation engines
-│   ├── services/          # Business logic services
-│   └── utils/             # Utility functions
-├── test/                  # Test suites
-│   ├── phase1/           # Phase 1 tests (String Arrays)
-│   ├── phase2/           # Phase 2 tests (Variable Recovery)
-│   ├── samples/          # Test sample files
-│   └── integration/      # Integration tests
-├── docs/                  # Documentation
-└── coverage/             # Generated coverage reports
-```
+For the complete project structure including all planned components and services, see [docs/PROJECT_STRUCTURE.md](docs/PROJECT_STRUCTURE.md).
 
 See [docs/README.md](docs/README.md) for detailed capabilities and status.

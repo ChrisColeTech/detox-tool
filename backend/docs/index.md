@@ -6,7 +6,11 @@ Welcome to the comprehensive documentation for the Detox-Tool backend deobfuscat
 
 ### Core Documentation
 - **[Backend Status & Overview](README.md)** - Complete status assessment, current capabilities, and missing features
-- **[Implementation Plan](IMPLEMENTATION_PLAN.md)** - 8-phase development plan with detailed breakdown and success metrics
+- **[Project Structure](PROJECT_STRUCTURE.md)** - Complete backend project tree and component overview
+- **[Implementation Plan](IMPLEMENTATION_PLAN.md)** - 12-phase development plan with detailed breakdown and success metrics
+- **[Architecture Guide](ARCHITECTURE.md)** - Architecture principles, coding standards, and best practices
+- **[API Reference](API_REFERENCE.md)** - Comprehensive API documentation with request/response formats
+- **[Initialization Guide](INITIALIZATION.md)** - Backend setup scripts and development environment configuration
 
 ### API Documentation
 - **Core Engines**
