@@ -6,6 +6,30 @@ Based on comprehensive analysis of the task-writer reference implementation and 
 
 The detox-tool will implement a tab-based desktop application interface for JavaScript deobfuscation, following the exact architecture patterns from task-writer. The implementation will be broken down into single-feature phases, with each phase being fully completed before moving to the next.
 
+## 🎯 Style Guide Compliance (MANDATORY)
+
+**ALL phases MUST follow the style guide from `/mnt/c/projects/docs/STYLE_GUIDE.md`**
+
+### 🔒 Architectural Enforcement Rules
+- **Component Size Limits**: Page (100 lines), Feature (150 lines), Layout (80 lines), UI (100 lines)
+- **TypeScript Strict**: NO 'any' types allowed, comprehensive type coverage
+- **Theme Variables ONLY**: NO hardcoded colors, use `bg-surface`, `text-text`, `app-border`
+- **WCAG 2.1 AA**: Full accessibility compliance from day one
+- **Service Layer**: ALL business logic in services, components are declarative only
+
+### 🎨 Theme System Requirements
+- **ALL 48 theme variants** MUST work perfectly
+- **CSS Specificity Order**: scheme → dark → high-contrast
+- **Enhanced Effects**: Binary Explorer and Cyber Forensics themes only
+- **Instant Switching**: Theme changes with no re-renders
+
+### ♿ Accessibility Requirements (NON-NEGOTIABLE)
+- **Semantic HTML**: Proper header, nav, main, aside, footer structure
+- **Keyboard Navigation**: All features 100% keyboard accessible
+- **Screen Reader Support**: ARIA labels, live regions, announcements
+- **Focus Management**: Visible focus indicators, logical tab order
+- **Reduced Motion**: Respect user motion preferences
+
 ## 📋 Phase Breakdown
 
 **Total Implementation Time**: 300 minutes (5 hours) across 8 focused phases  
@@ -15,6 +39,17 @@ The detox-tool will implement a tab-based desktop application interface for Java
 ### Phase 1: Foundation & Architecture (PRIORITY 1)
 **Goal**: Establish working layout shell with basic navigation  
 **Time Estimate**: 45 minutes
+
+**📋 Related Documentation:**
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Complete directory organization
+- [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - Theme system implementation
+- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - WCAG 2.1 AA compliance requirements
+
+**🎯 Style Guide Enforcement:**
+- **MANDATORY**: All components MUST use theme variables, NO hardcoded colors
+- **MANDATORY**: TypeScript strict mode with NO 'any' types allowed
+- **MANDATORY**: Component size limits enforced (see below)
+- **MANDATORY**: WCAG 2.1 AA accessibility compliance from day one
 
 #### 1.1 Project Structure Setup
 - [ ] Delete current `/src` folder completely
@@ -60,6 +95,18 @@ The detox-tool will implement a tab-based desktop application interface for Java
 ### Phase 2: Layout Shell (PRIORITY 1)
 **Goal**: Working layout with title bar, sidebar, and main content area  
 **Time Estimate**: 45 minutes
+
+**📋 Related Documentation:**
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Layout component architecture
+- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Semantic HTML and accessibility patterns
+- [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - Theme variable usage
+
+**🎯 Style Guide Enforcement:**
+- **MANDATORY**: Layout components MUST be < 80 lines each
+- **MANDATORY**: Use semantic HTML (header, nav, main, aside, footer)
+- **MANDATORY**: All interactive elements need keyboard navigation
+- **MANDATORY**: Proper ARIA labels and roles throughout
+- **MANDATORY**: Theme variables only: `bg-surface`, `text-text`, `app-border`
 
 #### 2.1 Custom Hooks for State Management
 - [ ] Create `/src/hooks/useLayoutState.ts` - Layout state orchestration
@@ -113,6 +160,18 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Goal**: Complete tab management with drag & drop, persistence, and controls  
 **Time Estimate**: 37.5 minutes
 
+**📋 Related Documentation:**
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Tab component specifications
+- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Interactive component patterns
+- [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - Tab styling variables
+
+**🎯 Style Guide Enforcement:**
+- **MANDATORY**: Tab components MUST be < 150 lines each
+- **MANDATORY**: Drag & drop MUST be keyboard accessible
+- **MANDATORY**: Tab persistence with proper error handling
+- **MANDATORY**: Visual feedback for all tab states (active, dirty, hover)
+- **MANDATORY**: Use `tab-icon`, `surface-hover`, `accent` theme variables
+
 #### 3.1 Tab Bar Implementation  
 - [ ] Create `/src/components/features/tabbar/TabBarScrollable.tsx` - Scrollable tab container
 - [ ] Create `/src/components/features/tabbar/TabItem.tsx` - Individual tab component
@@ -136,6 +195,18 @@ The detox-tool will implement a tab-based desktop application interface for Java
 ### Phase 4: Theming System (PRIORITY 2)
 **Goal**: Complete 12-color scheme theming with dual-dimension support  
 **Time Estimate**: 45 minutes
+
+**📋 Related Documentation:**
+- [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - Complete CSS theme definitions
+- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Theme switching patterns
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Theme configuration architecture
+
+**🎯 Style Guide Enforcement:**
+- **MANDATORY**: Implement ALL 48 theme variants exactly as specified
+- **MANDATORY**: Proper CSS specificity order (scheme → dark → high-contrast)
+- **MANDATORY**: Enhanced effects for Binary Explorer and Cyber Forensics only
+- **MANDATORY**: Theme switching MUST be instant (no re-renders)
+- **MANDATORY**: All components MUST work with every theme variant
 
 #### 4.1 Color Scheme Implementation
 - [ ] Create `/src/styles/themes.css` - All 12 detox-tool specific color schemes
@@ -167,6 +238,18 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Goal**: Main deobfuscation tool interface with Monaco editor integration  
 **Time Estimate**: 45 minutes
 
+**📋 Related Documentation:**
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Editor component architecture
+- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Form and editor accessibility
+- [Backend API Reference](../../backend/docs/API_REFERENCE.md) - Deobfuscation engine integration
+
+**🎯 Style Guide Enforcement:**
+- **MANDATORY**: Monaco Editor MUST respect theme variables
+- **MANDATORY**: File operations with proper error boundaries
+- **MANDATORY**: Progress indicators for long operations
+- **MANDATORY**: Keyboard shortcuts for all editor actions
+- **MANDATORY**: Screen reader announcements for processing status
+
 #### 5.1 Monaco Editor Integration
 - [ ] Install and configure Monaco Editor for React
 - [ ] Create `/src/components/features/editor/CodeEditor.tsx` - Monaco wrapper
@@ -196,6 +279,18 @@ The detox-tool will implement a tab-based desktop application interface for Java
 ### Phase 6: Search System (PRIORITY 3)
 **Goal**: Global spotlight search across files and features  
 **Time Estimate**: 30 minutes
+
+**📋 Related Documentation:**
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Search component architecture
+- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Search and modal patterns
+- [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - Search UI styling
+
+**🎯 Style Guide Enforcement:**
+- **MANDATORY**: Search modal MUST be keyboard navigable
+- **MANDATORY**: Focus management when opening/closing search
+- **MANDATORY**: Live region announcements for search results
+- **MANDATORY**: Fuzzy search with proper result highlighting
+- **MANDATORY**: Escape key closes search, Enter selects result
 
 #### 6.1 Search Infrastructure
 - [ ] Create `/src/components/features/search/SpotlightSearch.tsx` - Main search component
@@ -227,6 +322,18 @@ The detox-tool will implement a tab-based desktop application interface for Java
 **Goal**: Complete settings interface with all customization options  
 **Time Estimate**: 37.5 minutes
 
+**📋 Related Documentation:**
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Settings component specifications
+- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Form patterns and validation
+- [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - Theme selector implementation
+
+**🎯 Style Guide Enforcement:**
+- **MANDATORY**: All form controls MUST be accessible
+- **MANDATORY**: Theme preview with live updates
+- **MANDATORY**: Settings validation with user-friendly errors
+- **MANDATORY**: Proper form labels and descriptions
+- **MANDATORY**: Keyboard navigation through all settings
+
 #### 7.1 Settings UI Implementation
 - [ ] Create `/src/components/features/settings/Settings.tsx` - Main settings component
 - [ ] Create `/src/components/features/settings/AppearanceSettings.tsx` - Theme and appearance
@@ -250,6 +357,18 @@ The detox-tool will implement a tab-based desktop application interface for Java
 ### Phase 8: Advanced Features (PRIORITY 4)
 **Goal**: Polish features and advanced functionality  
 **Time Estimate**: 30 minutes
+
+**📋 Related Documentation:**
+- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Advanced component patterns
+- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Polish and accessibility refinement
+- [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - Enhanced effects implementation
+
+**🎯 Style Guide Enforcement:**
+- **MANDATORY**: Error boundaries on all major components
+- **MANDATORY**: Comprehensive keyboard shortcut system
+- **MANDATORY**: Toast notifications with proper timing
+- **MANDATORY**: Reduced motion preferences respected
+- **MANDATORY**: Final accessibility audit and fixes
 
 #### 8.1 Keyboard Shortcuts System
 - [ ] Create `/src/hooks/useKeyboardShortcuts.ts` - Global shortcuts management
@@ -436,6 +555,12 @@ Each phase includes:
 
 ### Quality Gates (ENFORCED CHECKPOINTS)
 **PHASE COMPLETION BLOCKERS** - Must pass ALL before proceeding:
+
+**📋 Documentation Compliance:**
+- ✅ All related documentation links reviewed and followed
+- ✅ Style guide requirements implemented exactly as specified
+- ✅ Theme system compliance verified with all 48 variants
+- ✅ Accessibility requirements tested and confirmed
 
 1. **Code Quality Gates**:
    - ✅ All components under size limits (ENFORCED)
