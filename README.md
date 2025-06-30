@@ -1,6 +1,22 @@
 # Detox Tool
 
+[![CI Status](https://github.com/ChrisColeTech/detox-tool/workflows/CI/badge.svg)](https://github.com/ChrisColeTech/detox-tool/actions)
+[![Security Status](https://github.com/ChrisColeTech/detox-tool/workflows/Security/badge.svg)](https://github.com/ChrisColeTech/detox-tool/actions)
+[![GitHub Stars](https://img.shields.io/github/stars/ChrisColeTech/detox-tool.svg)](https://github.com/ChrisColeTech/detox-tool/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/ChrisColeTech/detox-tool.svg)](https://github.com/ChrisColeTech/detox-tool/network)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![Node Version](https://img.shields.io/node/v/detox-tool.svg)](https://nodejs.org/)
+[![Platform Support](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-blue.svg)](https://github.com/ChrisColeTech/detox-tool)
+[![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Electron](https://img.shields.io/badge/Electron-47848F?logo=electron&logoColor=white)](https://www.electronjs.org/)
+[![Code Quality](https://img.shields.io/badge/code%20quality-A-brightgreen.svg)](https://github.com/ChrisColeTech/detox-tool)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/ChrisColeTech/detox-tool/pulls)
+
 A powerful JavaScript deobfuscation and code analysis tool designed for reverse engineering webpack bundles and React applications. Built with Electron and React for cross-platform desktop usage.
+
+> **🚀 Production Ready** • **⚡ Real-time Processing** • **🔧 Cross-Platform** • **📦 30-Phase Architecture**
 
 ## 🚀 Complete Feature Overview
 
