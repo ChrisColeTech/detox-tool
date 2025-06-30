@@ -42,6 +42,8 @@ The detox-tool will implement a tab-based desktop application interface for Java
 
 **📋 Related Documentation:**
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Complete directory organization
+- [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - Service architecture and API mapping
+- [Backend API Reference](../../backend/docs/API_REFERENCE.md) - Backend endpoint specifications
 - [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - Theme system implementation
 - [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - WCAG 2.1 AA compliance requirements
 
@@ -240,8 +242,9 @@ The detox-tool will implement a tab-based desktop application interface for Java
 
 **📋 Related Documentation:**
 - [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Editor component architecture
+- [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - Service/hook to backend API mapping
+- [Backend API Reference](../../backend/docs/API_REFERENCE.md) - Complete backend API documentation
 - [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Form and editor accessibility
-- [Backend API Reference](../../backend/docs/API_REFERENCE.md) - Deobfuscation engine integration
 
 **🎯 Style Guide Enforcement:**
 - **MANDATORY**: Monaco Editor MUST respect theme variables
@@ -249,6 +252,13 @@ The detox-tool will implement a tab-based desktop application interface for Java
 - **MANDATORY**: Progress indicators for long operations
 - **MANDATORY**: Keyboard shortcuts for all editor actions
 - **MANDATORY**: Screen reader announcements for processing status
+
+**🔌 API Integration Requirements:**
+- **MANDATORY**: Implement DeobfuscationService → POST /api/v1/deobfuscate
+- **MANDATORY**: Implement FileService → POST /api/v1/files/upload
+- **MANDATORY**: Implement AnalysisService → POST /api/v1/analyze
+- **MANDATORY**: Real-time progress tracking for long-running jobs
+- **MANDATORY**: Proper request/response type mapping as specified in FRONTEND_API_GUIDE.md
 
 #### 5.1 Monaco Editor Integration
 - [ ] Install and configure Monaco Editor for React
