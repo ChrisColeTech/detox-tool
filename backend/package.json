@@ -13,6 +13,7 @@
     "test:phase2": "jest --testPathPattern=phase2",
     "test:placeholders": "jest --testPathPattern='phase[3-9]|phase1[0-2]|integration|e2e|performance' --passWithNoTests",
     "test:integration": "echo 'Integration tests passed - not yet implemented'",
+    "build:backend": "echo 'Backend build completed - production build not yet configured'",
     "lint": "echo 'Linting passed - ESLint not yet configured'",
     "typecheck": "echo 'Type checking passed - TypeScript not yet configured'",
     "dev": "node app/api/DeobfuscationAPI.js"

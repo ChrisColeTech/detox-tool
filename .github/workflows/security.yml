@@ -33,7 +33,7 @@ jobs:
       run: |
         if [ -d "frontend/app" ]; then
           cd frontend/app
-          npm ci
+          npm ci --legacy-peer-deps
           npm audit --audit-level moderate
           npm audit fix --force || true
         else
@@ -83,14 +83,14 @@ jobs:
       run: |
         cd backend && npm ci
         if [ -d "frontend/app" ]; then
-          cd frontend/app && npm ci
+          cd frontend/app && npm ci --legacy-peer-deps
         else
           echo "Frontend not yet implemented - skipping frontend dependencies"
         fi
     
     - name: Build project
       run: |
-        npm run build:backend || echo "Backend build not yet configured"
+        cd backend && npm run build:backend || echo "Backend build not yet configured"
         if [ -d "frontend/app" ]; then
           cd frontend/app && npm run build
         else
@@ -152,7 +152,7 @@ jobs:
       run: |
         if [ -d "frontend/app" ]; then
           cd frontend/app
-          npm ci
+          npm ci --legacy-peer-deps
           license-checker --summary --onlyAllow "MIT;ISC;BSD;Apache-2.0;CC0-1.0;Unlicense" || true
         else
           echo "Frontend not yet implemented - skipping frontend license check"
@@ -211,7 +211,7 @@ jobs:
       run: |
         npm install -g eslint eslint-plugin-security
         if [ -d "frontend/app" ]; then
-          cd frontend/app && npm ci
+          cd frontend/app && npm ci --legacy-peer-deps
         else
           echo "Frontend not yet implemented - skipping frontend ESLint installation"
         fi
