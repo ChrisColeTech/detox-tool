@@ -25,7 +25,7 @@ cd ..
 npm create vite app -- --template react-ts
 cd app
 
-# Step 3: Install all dependencies
+# Step 3: Install all dependencies and regenerate lock file
 echo -e "\n${YELLOW}Step 3: Installing all dependencies...${NC}"
 npm install @monaco-editor/react framer-motion lucide-react clsx tailwind-merge @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
 npm install -D tailwindcss@^3.3.6 postcss autoprefixer prettier @types/node --legacy-peer-deps
@@ -101,32 +101,32 @@ cat > package.json << 'EOF'
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
-    "@dnd-kit/sortable": "^8.0.0",
+    "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
     "@monaco-editor/react": "^4.6.0",
     "clsx": "^2.0.0",
-    "framer-motion": "^10.16.16",
-    "lucide-react": "^0.294.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "tailwind-merge": "^2.0.0"
+    "framer-motion": "^12.20.0",
+    "lucide-react": "^0.525.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwind-merge": "^3.3.0"
   },
   "devDependencies": {
-    "@types/node": "^20.10.4",
-    "@types/react": "^18.2.43",
-    "@types/react-dom": "^18.2.17",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.35.0",
+    "@typescript-eslint/parser": "^8.35.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.16",
-    "eslint": "^8.55.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint": "^9.30.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.32",
     "prettier": "^3.1.1",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^7.0.0"
   }
 }
 EOF
