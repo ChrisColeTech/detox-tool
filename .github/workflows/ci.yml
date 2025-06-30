@@ -1,0 +1,165 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  # Backend tests
+  backend-test:
+    runs-on: ubuntu-latest
+    name: Backend Tests
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+    
+    - name: Install backend dependencies
+      run: npm ci
+    
+    - name: Run backend tests
+      run: npm run test
+    
+    - name: Run backend linting
+      run: npm run lint
+      
+    - name: Check backend types
+      run: npm run typecheck
+
+  # Frontend tests and build
+  frontend-test:
+    runs-on: ubuntu-latest
+    name: Frontend Tests & Build
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: frontend/app/package-lock.json
+    
+    - name: Install frontend dependencies
+      working-directory: frontend/app
+      run: npm ci
+    
+    - name: Run frontend type checking
+      working-directory: frontend/app
+      run: npm run typecheck
+    
+    - name: Run frontend linting
+      working-directory: frontend/app
+      run: npm run lint
+    
+    - name: Run frontend formatting check
+      working-directory: frontend/app
+      run: npm run format:check
+    
+    - name: Build frontend
+      working-directory: frontend/app
+      run: npm run build
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-build
+        path: frontend/app/dist
+        retention-days: 7
+
+  # Integration tests
+  integration-test:
+    runs-on: ubuntu-latest
+    name: Integration Tests
+    needs: [backend-test, frontend-test]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+    
+    - name: Install all dependencies
+      run: |
+        npm ci
+        cd frontend/app && npm ci
+    
+    - name: Download frontend build
+      uses: actions/download-artifact@v4
+      with:
+        name: frontend-build
+        path: frontend/app/dist
+    
+    - name: Run integration tests
+      run: npm run test:integration
+
+  # Security scanning
+  security:
+    runs-on: ubuntu-latest
+    name: Security Scan
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+    
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v3
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  # Code quality analysis
+  quality:
+    runs-on: ubuntu-latest
+    name: Code Quality
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: |
+        npm ci
+        cd frontend/app && npm ci
+    
+    - name: Run backend test coverage
+      run: npm run test:coverage
+    
+    - name: Run frontend quality checks
+      working-directory: frontend/app
+      run: npm run check-all
+    
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v4
+      if: always()
+      with:
+        files: ./coverage/lcov.info,./frontend/app/coverage/lcov.info
+        fail_ci_if_error: false

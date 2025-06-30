@@ -1,0 +1,207 @@
+name: Security
+
+on:
+  schedule:
+    # Run security scans daily at 2 AM UTC
+    - cron: '0 2 * * *'
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  # Dependency vulnerability scanning
+  dependency-scan:
+    runs-on: ubuntu-latest
+    name: Dependency Vulnerability Scan
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Run npm audit (backend)
+      run: |
+        npm audit --audit-level moderate
+        npm audit fix --force || true
+    
+    - name: Run npm audit (frontend)
+      working-directory: frontend/app
+      run: |
+        npm ci
+        npm audit --audit-level moderate
+        npm audit fix --force || true
+    
+    - name: Check for security updates
+      run: |
+        npx npm-check-updates --target minor
+        cd frontend/app && npx npm-check-updates --target minor
+
+  # CodeQL security analysis
+  codeql:
+    runs-on: ubuntu-latest
+    name: CodeQL Analysis
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript' ]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+        queries: security-extended,security-and-quality
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: |
+        npm ci
+        cd frontend/app && npm ci
+    
+    - name: Build project
+      run: |
+        npm run build:backend || true
+        cd frontend/app && npm run build
+    
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}"
+
+  # Container security scanning (if using Docker)
+  container-scan:
+    runs-on: ubuntu-latest
+    name: Container Security Scan
+    if: false  # Enable if using Docker containers
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build Docker image
+      run: docker build -t detox-tool:latest .
+    
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'detox-tool:latest'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+    
+    - name: Upload Trivy scan results
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+  # License compliance check
+  license-check:
+    runs-on: ubuntu-latest
+    name: License Compliance
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install license checker
+      run: npm install -g license-checker
+    
+    - name: Check backend licenses
+      run: |
+        npm ci
+        license-checker --summary --onlyAllow "MIT;ISC;BSD;Apache-2.0;CC0-1.0;Unlicense" || true
+    
+    - name: Check frontend licenses
+      working-directory: frontend/app
+      run: |
+        npm ci
+        license-checker --summary --onlyAllow "MIT;ISC;BSD;Apache-2.0;CC0-1.0;Unlicense" || true
+    
+    - name: Generate license report
+      run: |
+        echo "## License Report" > license-report.md
+        echo "" >> license-report.md
+        echo "### Backend Dependencies" >> license-report.md
+        license-checker --markdown >> license-report.md
+        echo "" >> license-report.md
+        echo "### Frontend Dependencies" >> license-report.md
+        cd frontend/app && license-checker --markdown >> ../../license-report.md
+    
+    - name: Upload license report
+      uses: actions/upload-artifact@v4
+      with:
+        name: license-report
+        path: license-report.md
+
+  # Secrets scanning
+  secrets-scan:
+    runs-on: ubuntu-latest
+    name: Secrets Scan
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Run gitleaks
+      uses: gitleaks/gitleaks-action@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }}
+
+  # SAST (Static Application Security Testing)
+  sast:
+    runs-on: ubuntu-latest
+    name: Static Application Security Testing
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+    
+    - name: Install ESLint security plugin
+      run: |
+        npm install -g eslint eslint-plugin-security
+        cd frontend/app && npm ci
+    
+    - name: Run security linting (backend)
+      run: |
+        npx eslint . --ext .js,.ts --config .eslintrc.security.js || true
+    
+    - name: Run security linting (frontend)
+      working-directory: frontend/app
+      run: |
+        npm run lint || true
+    
+    - name: Run Semgrep SAST
+      uses: semgrep/semgrep-action@v1
+      with:
+        config: >-
+          p/security-audit
+          p/secrets
+          p/javascript
+          p/typescript
+          p/react
+        publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
+      continue-on-error: true
