@@ -6,21 +6,30 @@
  * @created: 2025-06-30
  */
 
-const Phase3Demo = require('../../app/core/processors/ControlFlowProcessor');
+const ControlFlowProcessor = require('../../app/core/processors/ControlFlowProcessor');
+const DeadCodeProcessor = require('../../app/core/processors/DeadCodeProcessor');
+const ComplexityAnalyzer = require('../../app/core/analyzers/ComplexityAnalyzer');
 
 describe('Phase3Demo', () => {
-  let instance;
+  let controlFlowProcessor;
+  let deadCodeProcessor;
+  let complexityAnalyzer;
   
   beforeEach(() => {
-    // TODO: Setup test instance during Phase 3
-    // instance = new Phase3Demo();
+    controlFlowProcessor = new ControlFlowProcessor();
+    deadCodeProcessor = new DeadCodeProcessor();
+    complexityAnalyzer = new ComplexityAnalyzer();
   });
 
   describe('Constructor', () => {
-    test('should throw not implemented error', () => {
-      expect(() => {
-        new Phase3Demo();
-      }).toThrow('not yet implemented');
+    test('should initialize Phase 3 components successfully', () => {
+      expect(controlFlowProcessor).toBeDefined();
+      expect(deadCodeProcessor).toBeDefined();
+      expect(complexityAnalyzer).toBeDefined();
+      
+      expect(controlFlowProcessor.getStatus().implemented).toBe(true);
+      expect(deadCodeProcessor.getStatus().implemented).toBe(true);
+      expect(complexityAnalyzer.getStatus().implemented).toBe(true);
     });
   });
 
@@ -32,11 +41,17 @@ describe('Phase3Demo', () => {
 
   describe('Status and Utilities', () => {
     test('should return implementation status', () => {
-      try {
-        new Phase3Demo();
-      } catch (error) {
-        expect(error.message).toContain('not yet implemented');
-      }
+      const controlFlowStatus = controlFlowProcessor.getStatus();
+      const deadCodeStatus = deadCodeProcessor.getStatus();
+      const complexityStatus = complexityAnalyzer.getStatus();
+      
+      expect(controlFlowStatus.phase).toBe('Phase 3');
+      expect(deadCodeStatus.phase).toBe('Phase 3');
+      expect(complexityStatus.phase).toBe('Phase 3');
+      
+      expect(controlFlowStatus.version).toBe('1.0.0');
+      expect(deadCodeStatus.version).toBe('1.0.0');
+      expect(complexityStatus.version).toBe('1.0.0');
     });
   });
 

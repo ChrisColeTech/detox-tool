@@ -17,10 +17,11 @@ describe('DeadCodeProcessor', () => {
   });
 
   describe('Constructor', () => {
-    test('should throw not implemented error', () => {
-      expect(() => {
-        new DeadCodeProcessor();
-      }).toThrow('not yet implemented');
+    test('should initialize successfully with default options', () => {
+      const processor = new DeadCodeProcessor();
+      expect(processor).toBeDefined();
+      expect(processor.getStatus().implemented).toBe(true);
+      expect(processor.getStatus().phase).toBe('Phase 3');
     });
   });
 

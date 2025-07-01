@@ -1,11 +1,12 @@
 import React from 'react'
 import Layout from '@/components/layout/Layout'
+import { ErrorProvider } from '@/contexts/ErrorContext'
 
 function App(): React.JSX.Element {
   return (
-    <Layout>
-      <div>Welcome to Detox Tool</div>
-    </Layout>
+    <ErrorProvider>
+      <Layout />
+    </ErrorProvider>
   )
 }
 

@@ -6,6 +6,9 @@
 const BaseEngine = require('./BaseEngine');
 const StringArrayProcessor = require('../StringArrayProcessor');
 const VariableNameRecovery = require('../VariableNameRecovery');
+const ControlFlowProcessor = require('../processors/ControlFlowProcessor');
+const DeadCodeProcessor = require('../processors/DeadCodeProcessor');
+const ComplexityAnalyzer = require('../analyzers/ComplexityAnalyzer');
 
 class HeavyObfuscationEngine extends BaseEngine {
     constructor() {
@@ -18,10 +21,15 @@ class HeavyObfuscationEngine extends BaseEngine {
             'string-array-decoding',
             'control-flow-deobfuscation',
             'bracket-notation-conversion',
-            'dead-code-elimination'
+            'dead-code-elimination',
+            'complexity-analysis',
+            'obfuscation-pattern-detection'
         ];
         this.stringArrayProcessor = new StringArrayProcessor();
         this.variableNameRecovery = new VariableNameRecovery();
+        this.controlFlowProcessor = new ControlFlowProcessor();
+        this.deadCodeProcessor = new DeadCodeProcessor();
+        this.complexityAnalyzer = new ComplexityAnalyzer();
     }
 
     /**
@@ -48,11 +56,19 @@ class HeavyObfuscationEngine extends BaseEngine {
         // Step 4: Simplify hex arithmetic
         processedCode = this._processHexArithmetic(processedCode, steps);
 
-        // Step 5: Detect control flow obfuscation
-        processedCode = this._processControlFlow(processedCode, steps);
+        // Step 5: Advanced control flow deobfuscation
+        const controlFlowResult = await this._processControlFlowAdvanced(processedCode, steps);
+        processedCode = controlFlowResult.code;
 
-        // Step 6: Clean up and format
+        // Step 6: Dead code elimination
+        const deadCodeResult = await this._processDeadCode(processedCode, steps);
+        processedCode = deadCodeResult.code;
+
+        // Step 7: Clean up and format
         processedCode = this._formatCode(processedCode, steps);
+
+        // Step 8: Analyze final complexity
+        const complexityResult = await this._analyzeComplexity(processedCode);
 
         return {
             code: processedCode,
@@ -61,7 +77,10 @@ class HeavyObfuscationEngine extends BaseEngine {
             stringArrays: stringArrayResult.stringArrays,
             decodedStrings: stringArrayResult.decodedStrings,
             variableMappings: variableResult.variableMappings,
-            meaningfulNames: variableResult.meaningfulNames
+            meaningfulNames: variableResult.meaningfulNames,
+            controlFlowMetrics: controlFlowResult.statistics,
+            deadCodeMetrics: deadCodeResult.statistics,
+            complexityAnalysis: complexityResult
         };
     }
 
@@ -223,23 +242,138 @@ class HeavyObfuscationEngine extends BaseEngine {
     }
 
     /**
-     * Process control flow obfuscation
+     * Process control flow obfuscation with advanced processor
      * @private
      */
-    _processControlFlow(code, steps) {
-        const controlFlowPattern = /while\s*\(\s*!!\[\]\s*\)\s*\{[^}]*try\s*\{[^}]*parseInt/g;
-        const matches = [...code.matchAll(controlFlowPattern)];
+    async _processControlFlowAdvanced(code, steps) {
+        this.controlFlowProcessor.reset();
         
-        if (matches.length > 0) {
+        const result = await this.controlFlowProcessor.process(code, {
+            simplifyConditionals: true,
+            unwrapSwitchObfuscation: true,
+            eliminateGotoPatterns: true,
+            flattenNestedBlocks: true,
+            optimizeControlFlow: true
+        });
+        
+        if (result.success) {
             steps.push({
-                name: "Control Flow Detection",
-                description: "Found control flow obfuscation patterns",
-                count: matches.length,
-                pattern: "while(![]) try/catch loops"
+                name: "Advanced Control Flow Deobfuscation",
+                description: `Applied ${result.metadata.simplificationsApplied.length} control flow simplifications`,
+                count: result.statistics.conditionalsSimplified + result.statistics.switchStatementsUnwrapped + result.statistics.gotoPatternsParsed,
+                pattern: "conditional/switch/goto simplification",
+                details: result.metadata.simplificationsApplied
             });
+            
+            if (result.metadata.controlFlowPatternsFound.length > 0) {
+                steps.push({
+                    name: "Obfuscation Pattern Detection",
+                    description: `Detected ${result.metadata.controlFlowPatternsFound.length} obfuscation patterns`,
+                    count: result.metadata.controlFlowPatternsFound.length,
+                    pattern: "obfuscation patterns",
+                    patterns: result.metadata.controlFlowPatternsFound.map(p => p.type)
+                });
+            }
+            
+            return {
+                code: result.deobfuscatedCode,
+                statistics: result.statistics
+            };
+        } else {
+            steps.push({
+                name: "Control Flow Processing",
+                description: "Advanced processing failed, code preserved",
+                error: result.error?.message,
+                pattern: "fallback mode"
+            });
+            
+            return {
+                code: code,
+                statistics: {}
+            };
         }
+    }
 
-        return code;
+    /**
+     * Process dead code elimination
+     * @private
+     */
+    async _processDeadCode(code, steps) {
+        this.deadCodeProcessor.reset();
+        
+        const result = await this.deadCodeProcessor.process(code, {
+            removeUnusedVariables: true,
+            removeUnusedFunctions: true,
+            removeUnreachableCode: true,
+            removeRedundantExpressions: true,
+            removeEmptyBlocks: true,
+            removeUnusedImports: true
+        });
+        
+        if (result.success) {
+            const totalEliminations = result.statistics.unusedVariablesRemoved + 
+                                    result.statistics.unusedFunctionsRemoved + 
+                                    result.statistics.unreachableCodeBlocksRemoved;
+            
+            if (totalEliminations > 0) {
+                steps.push({
+                    name: "Dead Code Elimination",
+                    description: `Removed ${totalEliminations} dead code elements`,
+                    count: totalEliminations,
+                    pattern: "unused/unreachable code removal",
+                    reduction: result.statistics.totalBytesReduced,
+                    details: result.metadata.eliminationsApplied
+                });
+            }
+            
+            return {
+                code: result.deobfuscatedCode,
+                statistics: result.statistics
+            };
+        } else {
+            steps.push({
+                name: "Dead Code Elimination",
+                description: "Dead code processing failed, code preserved",
+                error: result.error?.message,
+                pattern: "fallback mode"
+            });
+            
+            return {
+                code: code,
+                statistics: {}
+            };
+        }
+    }
+
+    /**
+     * Analyze code complexity
+     * @private
+     */
+    async _analyzeComplexity(code) {
+        this.complexityAnalyzer.reset();
+        
+        const result = await this.complexityAnalyzer.analyze(code, {
+            calculateCyclomaticComplexity: true,
+            calculateCognitiveComplexity: true,
+            analyzeNestingDepth: true,
+            detectObfuscationPatterns: true
+        });
+        
+        if (result.success) {
+            return {
+                complexity: result.complexity,
+                metrics: result.metrics,
+                warnings: result.warnings,
+                recommendations: result.recommendations
+            };
+        } else {
+            return {
+                complexity: { score: 0, level: 'unknown' },
+                metrics: {},
+                warnings: [`Complexity analysis failed: ${result.error?.message}`],
+                recommendations: []
+            };
+        }
     }
 
     /**
@@ -273,14 +407,22 @@ class HeavyObfuscationEngine extends BaseEngine {
                 'Hex variable names (_0x123abc)',
                 'String array obfuscation with full decoding',
                 'Decoder function extraction and resolution',
-                'Control flow flattening detection',
+                'Control flow flattening and switch obfuscation',
+                'Goto-style control flow patterns',
+                'Deep conditional chains and nesting',
                 'Arithmetic expression obfuscation',
-                'Property access obfuscation'
+                'Property access obfuscation',
+                'Dead code and unreachable statements'
             ],
             features: [
                 'Advanced string array decoding',
                 'Intelligent variable name recovery',
                 'Semantic naming based on context analysis',
+                'Control flow deobfuscation and simplification',
+                'Switch statement unwrapping and linearization',
+                'Goto pattern elimination',
+                'Dead code elimination and optimization',
+                'Complexity analysis and obfuscation detection',
                 'Multiple decoder function support',
                 'Automatic reference replacement',
                 'Code cleanup and optimization',

@@ -7,28 +7,36 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
+# Check if we're in the right directory
+if [ ! -f "package.json" ] || [ ! -d "frontend" ]; then
+    echo -e "${RED}❌ Error: Please run this script from the detox-tool root directory${NC}"
+    echo "   Expected structure: detox-tool/package.json and detox-tool/frontend/"
+    echo "   Current directory: $(pwd)"
+    exit 1
+fi
+
 # Print header
 echo -e "${GREEN}🚀 Detox Tool Frontend - Complete 30-Phase Project Initialization${NC}"
 echo "========================================================================"
-echo -e "${BLUE}Frontend directory: $(pwd)${NC}"
-echo -e "${BLUE}Project root: $(dirname $(pwd))${NC}"
+echo -e "${BLUE}Project root: $(pwd)${NC}"
+echo -e "${BLUE}Frontend directory: $(pwd)/frontend${NC}"
 
 # Step 1: Clean up any existing app directory
 echo -e "\n${YELLOW}Step 1: Cleaning up existing app directory...${NC}"
-if [ -d "../app" ]; then
-  rm -rf ../app
+if [ -d "frontend/app" ]; then
+  rm -rf frontend/app
 fi
 
 # Step 2: Create React TypeScript app with Vite
 echo -e "\n${YELLOW}Step 2: Scaffolding React TypeScript app with Vite...${NC}"
-cd ..
+cd frontend
 npm create vite app -- --template react-ts
 cd app
 
 # Step 3: Install all dependencies and regenerate lock file
 echo -e "\n${YELLOW}Step 3: Installing all dependencies...${NC}"
-npm install @monaco-editor/react framer-motion lucide-react clsx tailwind-merge @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
-npm install -D tailwindcss@^3.3.6 postcss autoprefixer prettier @types/node --legacy-peer-deps
+npm install @monaco-editor/react framer-motion@^11.0.0 lucide-react clsx tailwind-merge @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities @headlessui/react react-icons @fontsource/inter @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome @radix-ui/react-dialog @radix-ui/react-dropdown-menu @radix-ui/react-toast react-hot-toast react-router-dom tailwindcss-animate
+npm install -D tailwindcss@^3.3.6 postcss autoprefixer prettier @types/node @tailwindcss/forms globals ts-node typescript-eslint --legacy-peer-deps
 
 # Step 4: Initialize Tailwind CSS
 echo -e "\n${YELLOW}Step 4: Setting up Tailwind CSS...${NC}"
@@ -100,33 +108,49 @@ cat > package.json << 'EOF'
     "check-all": "npm run typecheck && npm run lint && npm run format:check"
   },
   "dependencies": {
-    "@dnd-kit/core": "^6.1.0",
+    "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@dnd-kit/utilities": "^3.2.2",
+    "@fontsource/inter": "^5.2.5",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@headlessui/react": "^2.2.4",
     "@monaco-editor/react": "^4.6.0",
-    "clsx": "^2.0.0",
-    "framer-motion": "^12.20.0",
-    "lucide-react": "^0.525.0",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-toast": "^1.1.5",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.0.0",
+    "lucide-react": "^0.511.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tailwind-merge": "^3.3.0"
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^7.6.1",
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@types/node": "^24.0.0",
-    "@types/react": "^19.1.0",
-    "@types/react-dom": "^19.1.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "@types/node": "^22.15.24",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
     "@typescript-eslint/eslint-plugin": "^8.35.0",
     "@typescript-eslint/parser": "^8.35.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "autoprefixer": "^10.4.16",
+    "@vitejs/plugin-react": "^4.4.1",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9.30.0",
     "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.5",
-    "postcss": "^8.4.32",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "postcss": "^8.5.3",
     "prettier": "^3.1.1",
-    "tailwindcss": "^3.3.6",
-    "typescript": "^5.2.2",
-    "vite": "^7.0.0"
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "vite": "^6.3.5"
   }
 }
 EOF
@@ -138,8 +162,9 @@ mkdir -p src/{components,pages,hooks,services,config,types,styles,utils,assets}
 
 # Complete component structure
 mkdir -p src/components/{layout,titlebar,features,sidebar,menu,search,shared,ui}
-mkdir -p src/components/features/{tabbar,deobfuscator,editor,file-explorer,comparison,security,settings,spotlight-search,notifications,welcome}
+mkdir -p src/components/features/{tabbar,deobfuscator,editor,file-explorer,comparison,security,settings,spotlight-search,notifications,welcome,filetree}
 mkdir -p src/components/shared/{forms,generators}
+mkdir -p src/{contexts,data,lib}
 
 # Complete page structure  
 mkdir -p src/pages/{deobfuscator,settings,help,about}
@@ -163,7 +188,7 @@ echo "✅ TypeScript type definitions created"
 # Step 8: Create ALL service files (EMPTY PLACEHOLDERS)
 echo -e "\n${YELLOW}Step 8: Creating service layer...${NC}"
 
-for service in index appService platformService settingsService toastService healthService tabService fileService deobfuscationService analysisService searchService keyboardService; do
+for service in index appService platformService settingsService toastService healthService tabService fileService deobfuscationService analysisService searchService keyboardService navigationService browserService electronService; do
   touch src/services/${service}.ts
 done
 
@@ -172,7 +197,7 @@ echo "✅ Service layer created"
 # Step 9: Create ALL hook files (EMPTY PLACEHOLDERS)  
 echo -e "\n${YELLOW}Step 9: Creating custom hooks...${NC}"
 
-for hook in useSettings useTabs useFileOperations useDeobfuscation useCodeAnalysis useSpotlightSearch useToast useKeyboardShortcuts useLayoutState useLayoutServices useLayoutKeyboard useLayoutEffects useTabBarDragDrop useTabBarScroll useWelcomeAnimations useWelcomeState useReducedMotion usePlatform; do
+for hook in useSettings useTabs useFileOperations useDeobfuscation useCodeAnalysis useSpotlightSearch useToast useKeyboardShortcuts useLayoutState useLayoutServices useLayoutKeyboard useLayoutEffects useTabBarDragDrop useTabBarScroll useWelcomeAnimations useWelcomeState useReducedMotion usePlatform useFileTreeState useErrorHandler useSpotlightKeyboard useSpotlightSearch useSidebarManagement; do
   touch src/hooks/${hook}.ts
 done
 
@@ -190,8 +215,26 @@ export function cn(...inputs: ClassValue[]) {
 }
 EOF
 
-for util in theme keyboard file validation animation platform index; do
+for util in theme keyboard file validation animation platform index fileTreeUtils; do
   touch src/utils/${util}.ts
+done
+
+# Create iconUtils with correct .tsx extension
+touch src/utils/iconUtils.tsx
+
+# Create lib utilities
+for lib in utils; do
+  touch src/lib/${lib}.ts
+done
+
+# Create contexts
+for context in ErrorContext; do
+  touch src/contexts/${context}.tsx
+done
+
+# Create data files
+for data in searchData; do
+  touch src/data/${data}.ts
 done
 
 echo "✅ Utilities created"
@@ -259,6 +302,11 @@ for component in WelcomeHeader WelcomeFeatureCard; do
   touch src/components/features/welcome/${component}.tsx
 done
 
+# Feature components - filetree
+for component in TreeNodeComponent FileTreeEmptyState; do
+  touch src/components/features/filetree/${component}.tsx
+done
+
 # Sidebar components
 for component in CollapseButton NavigationItems NavItem SettingsButton; do
   touch src/components/sidebar/${component}.tsx
@@ -307,9 +355,12 @@ echo "✅ ALL page files created"
 # Step 13: Create ALL config files (EMPTY PLACEHOLDERS)
 echo -e "\n${YELLOW}Step 13: Creating ALL config files...${NC}"
 
-for config in navigationConfig welcomeFeatures themeConfig keyboardConfig; do
+for config in welcomeFeatures themeConfig keyboardConfig; do
   touch src/config/${config}.ts
 done
+
+# Special case for navigationConfig (needs to be .tsx)
+touch src/config/navigationConfig.tsx
 
 echo "✅ ALL config files created"
 
@@ -396,12 +447,13 @@ echo -e "\n${YELLOW}Step 16: Creating MINIMUM bootstrap files...${NC}"
 cat > src/App.tsx << 'EOF'
 import React from 'react'
 import Layout from '@/components/layout/Layout'
+import { ErrorProvider } from '@/contexts/ErrorContext'
 
 function App(): React.JSX.Element {
   return (
-    <Layout>
-      <div>Welcome to Detox Tool</div>
-    </Layout>
+    <ErrorProvider>
+      <Layout />
+    </ErrorProvider>
   )
 }
 

@@ -1,773 +1,1039 @@
-# Detox Tool - Complete Implementation Plan
-
-Based on comprehensive analysis of the task-writer reference implementation and architecture documentation, this plan provides a systematic approach to implementing the detox-tool frontend following proven patterns.
+# Detox Tool - Complete Production Implementation Plan
+*Script-Based Component Generation & Full Feature Implementation*
 
 ## 🎯 Overview
 
-The detox-tool will implement a tab-based desktop application interface for JavaScript deobfuscation, following the exact architecture patterns from task-writer. The implementation will be broken down into **single-feature phases**, with each phase being fully completed before moving to the next.
+This implementation plan provides a systematic approach to complete the detox-tool frontend as a **production-ready application**. All components have been **pre-generated** from task-writer architecture - this plan covers **complete feature implementation** for a fully functional deobfuscation tool.
 
-## 🎯 Gold Standard Compliance (MANDATORY)
+**📋 Current Status**: Foundation complete with 300+ generated components
+**🎯 Goal**: Production-ready detox-tool with ALL features from PROJECT_STRUCTURE.md
+**📐 Architecture**: Follows task-writer patterns with /mnt/c/projects/docs/ standards
 
-**ALL phases MUST follow these gold standard documents:**
+## 🏗️ Prerequisites & Setup
 
-### 📋 **Required Reference Documents**
-1. **Style Guide**: `/mnt/c/projects/docs/STYLE_GUIDE.md` (Theme system, accessibility, animations)
-2. **Layout Architecture**: `/mnt/c/projects/detox-tool/frontend/docs/LAYOUT_ARCHITECTURE_STANDARD.md` (Shell structure, component hierarchy)
-3. **Component Architecture**: `/mnt/c/projects/detox-tool/frontend/docs/COMPONENT_ARCHITECTURE_STANDARD.md` (Size limits, patterns, TypeScript)
-4. **Theme Reference**: `/mnt/c/projects/detox-tool/frontend/docs/THEMES_COMPLETE_REFERENCE.md` (48 theme variants)
+### ✅ Foundation Complete
+- [x] **Project Structure**: 300+ components generated via scripts
+- [x] **Build System**: Vite + TypeScript + Tailwind configured  
+- [x] **Dependencies**: All packages installed (framer-motion v11, etc.)
+- [x] **Scripts**: 23 generation scripts in `/frontend/scripts/`
+- [x] **Architecture**: Layout shell, hooks, services, types generated
 
-### 🚨 **MANDATORY Compliance Rules**
-- **Architecture Compliance**: EXACT component hierarchy from Layout Architecture Standard
-- **Component Size Limits**: Page (100), Feature (150), Layout (80), UI (100) lines
-- **Theme Variables ONLY**: NO hardcoded colors, use bg-surface, text-text, app-border
-- **Directory Structure**: EXACT folder structure from standards documents
-- **TypeScript Strict**: NO 'any' types, comprehensive interfaces
+### 📋 Required Architecture Standards
+**ALL phases must strictly follow these gold standards:**
 
-### 🔒 Quality Gates (Before Each Phase)
-**EVERY phase must pass ALL quality gates before proceeding:**
+1. **Architecture Guide**: `/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`
+   - Component size limits: Page (100), Feature (150), Layout (80), UI (100) lines
+   - Single Responsibility Principle enforced
+   - Separation of concerns: UI vs business logic vs data management
+   - Composition over inheritance patterns
 
-1. **📐 Architecture Compliance**:
-   - [ ] Component hierarchy matches Layout Architecture Standard EXACTLY
-   - [ ] Directory structure follows standards documents EXACTLY
-   - [ ] Component size limits respected (never exceeded)
+2. **Style Guide**: `/mnt/c/projects/docs/STYLE_GUIDE.md`  
+   - ONLY theme variables (no hardcoded colors)
+   - Classes: `bg-surface`, `text-text`, `app-border`, `bg-accent`
+   - Support ALL 48 theme variants
+   - Enhanced effects: `cyberpunk-glow`, `neon-text` for cyberpunk themes
 
-2. **🎨 Design Compliance**:
-   - [ ] ONLY theme variables used (no hardcoded colors)
-   - [ ] All 48 theme variants work perfectly
-   - [ ] Responsive design follows mobile-first approach
+3. **Project Structure**: `/frontend/docs/PROJECT_STRUCTURE.md`
+   - Exact directory structure compliance
+   - Component categorization (layout/features/ui/shared)
+   - Phase-based feature organization
 
-3. **♿ Accessibility Compliance**:
-   - [ ] WCAG 2.1 AA standards met
-   - [ ] Full keyboard navigation implemented
-   - [ ] Screen reader support with ARIA labels
+## 🔒 Quality Gates (MANDATORY Before Each Phase)
 
-4. **🔧 Code Quality**:
-   - [ ] TypeScript strict mode (no 'any' types)
-   - [ ] All business logic in services (not components)
-   - [ ] Comprehensive error handling implemented
+**🚨 NO phase can begin until previous phase passes ALL quality gates:**
 
-5. **🎭 Animation Compliance**:
-   - [ ] Reduced motion preferences respected
-   - [ ] Motion-safe classes used exclusively
+### 1. 📐 Architecture Compliance
+- [ ] Component size limits respected (Architecture Guide)
+- [ ] Single responsibility principle followed
+- [ ] Business logic in services/hooks (not components)
+- [ ] Directory structure matches PROJECT_STRUCTURE.md exactly
 
-### 🎨 Theme System Requirements
-- **ALL 48 theme variants** MUST work perfectly
-- **CSS Specificity Order**: scheme → dark → high-contrast
-- **Enhanced Effects**: Binary Explorer and Cyber Forensics themes only
-- **Instant Switching**: Theme changes with no re-renders
+### 2. 🎨 Design Compliance  
+- [ ] ONLY theme variables used (`bg-surface`, `text-text`, etc.)
+- [ ] ALL 48 theme variants tested and working
+- [ ] Responsive design implemented (mobile-first)
+- [ ] Enhanced effects for cyberpunk themes working
 
-### ♿ Accessibility Requirements (NON-NEGOTIABLE)
-- **Semantic HTML**: Proper header, nav, main, aside, footer structure
-- **Keyboard Navigation**: All features 100% keyboard accessible
-- **Screen Reader Support**: ARIA labels, live regions, announcements
-- **Focus Management**: Visible focus indicators, logical tab order
-- **Reduced Motion**: Respect user motion preferences
+### 3. ♿ Accessibility Compliance
+- [ ] WCAG 2.1 AA standards met
+- [ ] Full keyboard navigation implemented
+- [ ] Screen reader support with ARIA labels
+- [ ] Focus management working correctly
 
-## 📋 Phase Breakdown - Single Feature Implementation
+### 4. 🔧 Code Quality
+- [ ] TypeScript strict mode (no `any` types)
+- [ ] Comprehensive error handling
+- [ ] All business logic in services (not components)
+- [ ] Component props interfaces defined
 
-**Total Implementation Time**: 900 minutes (15 hours) across 30 focused phases  
-**Average Phase Duration**: 30 minutes  
-**Phase range**: 20-45 minutes each
-
----
-
-### Phase 1: Project Structure Setup (FOUNDATION)
-**Goal**: Create working Vite + React + TypeScript project structure  
-**Time Estimate**: 30 minutes
-
-**📋 Related Documentation:**
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Complete directory organization  
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Theme system, accessibility, animations
-- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - Desktop app shell structure
-- [Component Architecture Standard](COMPONENT_ARCHITECTURE_STANDARD.md) - Size limits, patterns, TypeScript
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Code patterns and examples
-
-**🎯 Single Feature**: Project scaffolding and build system
-
-**🔧 Implementation Tasks:**
-- [ ] Execute `frontend/docs/init-project.sh` to scaffold React app
-- [ ] Configure Vite with TypeScript strict mode
-- [ ] Set up ESLint with accessibility rules
-- [ ] Configure Tailwind CSS with custom theme variables
-- [ ] Install core dependencies (Lucide icons, clsx, etc.)
-- [ ] Create basic file structure following task-writer patterns
-- [ ] Verify build system works (`npm run build`)
-
-**✅ Success Criteria**: `npm run dev` starts app, `npm run build` succeeds, TypeScript strict mode enabled
+### 5. 🧪 Testing & Build
+- [ ] `npm run build` passes without errors
+- [ ] `npm run typecheck` passes
+- [ ] Component integration tested
+- [ ] All imports resolve correctly
 
 ---
 
-### Phase 2: Type System Foundation (FOUNDATION)
-**Goal**: Create comprehensive TypeScript type definitions  
-**Time Estimate**: 25 minutes
+## 📋 Implementation Phases
+*One feature per phase - 100% complete before next phase*
 
-**📋 Related Documentation:**
-- [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - API type definitions
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Type organization
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - TypeScript patterns and interfaces
+### **Phase 0: Foundation Validation** ⚡ (5 mins)
+**Goal**: Validate script-generated foundation is production-ready
 
-**🎯 Single Feature**: Complete type system
+**📂 Focus**: Generated components validation and build verification
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/types/navigation.ts` - Navigation and routing types
-- [ ] Create `/src/types/tab.ts` - Tab management types
-- [ ] Create `/src/types/theme.ts` - Theming system types
-- [ ] Create `/src/types/platform.ts` - Platform abstraction types
-- [ ] Create `/src/types/deobfuscation.ts` - Tool-specific types
-- [ ] Create `/src/types/api.ts` - Backend API request/response types
-- [ ] Create `/src/types/electron-api.d.ts` - Electron API definitions
+**📋 Tasks**:
+- [ ] Verify all 300+ generated components compile
+- [ ] Test theme system with multiple color schemes
+- [ ] Validate layout shell renders correctly
+- [ ] Confirm all TypeScript types resolve
+- [ ] Test responsive breakpoints
 
-**✅ Success Criteria**: All types compile without errors, no 'any' types used
+**🔗 References**:
+- Architecture Guide: Component size limits validation (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Style Guide: Theme variable usage verification (`/mnt/c/projects/docs/STYLE_GUIDE.md`)
+- Theme Documentation: `/frontend/docs/THEMES_COMPLETE_REFERENCE.md`
+- Implementation Examples: `/frontend/docs/IMPLEMENTATION_EXAMPLES.md`
+- Scripts README: `/frontend/scripts/README.md`
 
----
-
-### Phase 3: Service Layer Architecture (FOUNDATION)
-**Goal**: Implement core service layer with dependency injection  
-**Time Estimate**: 35 minutes
-
-**📋 Related Documentation:**
-- [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - Service implementation patterns
-- [Backend API Reference](../../backend/docs/API_REFERENCE.md) - API endpoints
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Service class patterns and dependency injection
-
-**🎯 Single Feature**: Service layer foundation
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/services/appService.ts` - Application coordination
-- [ ] Create `/src/services/platformService.ts` - Platform abstraction
-- [ ] Create `/src/services/settingsService.ts` - Settings persistence
-- [ ] Create `/src/services/toastService.ts` - Notification system
-- [ ] Create `/src/services/healthService.ts` - Backend health monitoring
-- [ ] Implement service registry and dependency injection
-- [ ] Add error handling patterns
-
-**✅ Success Criteria**: Services instantiate correctly, dependency injection works
+**✅ Success Criteria**: 
+- Build completes without errors
+- Theme switching functional
+- Layout shell displays
+- No TypeScript errors
 
 ---
 
-### Phase 4: Theme System Implementation (CORE FEATURE)
-**Goal**: Complete 48-variant theme system with CSS variables  
-**Time Estimate**: 45 minutes
+### **Phase 1: Welcome Page & Navigation** 🏠 (8 mins)
+**Goal**: Complete welcome page with working navigation system
 
-**📋 Related Documentation:**
-- [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - All theme definitions
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Theme requirements
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Theme variable usage and enhanced effects
+**📂 Focus**: `/pages/WelcomePage.tsx` + navigation framework
 
-**🎯 Single Feature**: Complete theming system
+**📋 Tasks**:
+- [ ] Implement welcome page layout with feature cards
+- [ ] Create navigation configuration system
+- [ ] Add auto-discovery for page components  
+- [ ] Implement tab creation from welcome page
+- [ ] Add feature preview cards for deobfuscation tools
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/styles/variables.css` - CSS custom properties
-- [ ] Create `/src/styles/themes.css` - All 12 color schemes × 4 variants
-- [ ] Implement theme switching logic with proper CSS specificity
-- [ ] Add enhanced effects for Binary Explorer and Cyber Forensics
-- [ ] Create theme persistence with settings service
-- [ ] Test all 48 theme combinations
+**🔗 References**:
+- Architecture Guide: Page component patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md` - 100 line limit)
+- Style Guide: Feature card styling (`/mnt/c/projects/docs/STYLE_GUIDE.md` - theme variables)
+- Theme Documentation: `/frontend/docs/THEMES_COMPLETE_REFERENCE.md` (48 variants)
+- Implementation Examples: `/frontend/docs/IMPLEMENTATION_EXAMPLES.md` (WelcomePage patterns)
+- PROJECT_STRUCTURE.md: Welcome page requirements
+- Generated: `/src/pages/WelcomePage.tsx`, `/src/config/navigationConfig.ts`
 
-**✅ Success Criteria**: All 48 themes work, switching is instant, persistence works
-
----
-
-### Phase 5: Basic Layout Shell (CORE FEATURE)
-**Goal**: Create main layout structure with header, sidebar, content  
-**Time Estimate**: 30 minutes
-
-**📋 Related Documentation:**
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Layout component architecture
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Semantic HTML requirements
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Semantic HTML and accessibility patterns
-
-**🎯 Single Feature**: Application layout shell
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/layout/Layout.tsx` - Main layout orchestrator (< 80 lines)
-- [ ] Create `/src/components/layout/TitleBar.tsx` - Top title bar
-- [ ] Create `/src/components/layout/Sidebar.tsx` - Left navigation sidebar
-- [ ] Create `/src/components/layout/MainContent.tsx` - Content area
-- [ ] Implement semantic HTML structure
-- [ ] Apply theme variables throughout
-
-**✅ Success Criteria**: Layout renders correctly, responsive, all themes work
+**✅ Success Criteria**:
+- Welcome page renders with feature cards
+- Navigation to other pages works
+- Tab system functional
+- Responsive on all screen sizes
+- All 48 themes render correctly
 
 ---
 
-### Phase 6: Navigation Auto-Discovery (CORE FEATURE)
-**Goal**: Implement page auto-discovery and navigation system  
-**Time Estimate**: 35 minutes
+### **Phase 2: Settings System & Theme Management** ⚙️ (15 mins)  
+**Goal**: Complete settings page with theme switching and preferences
 
-**📋 Related Documentation:**
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Auto-discovery patterns
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Navigation requirements
+**📂 Focus**: `/pages/settings/SettingsPage.tsx` + settings infrastructure
 
-**🎯 Single Feature**: Auto-discovery navigation
+**📋 Tasks**:
+- [ ] Implement settings page with section cards
+- [ ] Create theme selection with live preview
+- [ ] Add appearance settings (sidebar position, status bar)
+- [ ] Implement settings persistence via services
+- [ ] Add reset to defaults functionality
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/config/navigationConfig.tsx` - Auto-discovery implementation
-- [ ] Implement `import.meta.glob()` page scanning
-- [ ] Create navigation configuration validation
-- [ ] Add navigation state management
-- [ ] Create sidebar navigation rendering
-- [ ] Implement keyboard navigation
+**🔗 References**:
+- Architecture Guide: Service layer patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Style Guide: Settings section styling (`/mnt/c/projects/docs/STYLE_GUIDE.md`)
+- Theme Documentation: `/frontend/docs/THEMES_COMPLETE_REFERENCE.md` (theme switching)
+- Implementation Examples: `/frontend/docs/IMPLEMENTATION_EXAMPLES.md` (settings patterns)
+- Generated: `/src/components/features/settings/Settings.tsx`
+- Generated: `/src/components/shared/forms/` components
+- Generated: `/src/hooks/useSettings.ts`
 
-**✅ Success Criteria**: Pages auto-discovered, sidebar navigation works
-
----
-
-### Phase 7: Basic Page System (CORE FEATURE)
-**Goal**: Create foundational pages with navigation configs  
-**Time Estimate**: 25 minutes
-
-**📋 Related Documentation:**
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Page component patterns
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Page and panel component patterns
-
-**🎯 Single Feature**: Page system foundation
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/pages/WelcomePage.tsx` - Landing page with navigation config (root level)
-- [ ] Create `/src/pages/deobfuscator/DeobfuscatorPage.tsx` - Main tool page stub with panel
-- [ ] Create `/src/pages/deobfuscator/DeobfuscatorPanel.tsx` - Associated sidebar panel
-- [ ] Create `/src/pages/settings/SettingsPage.tsx` - Settings page stub with panel
-- [ ] Create `/src/pages/settings/SettingsPanel.tsx` - Associated settings panel
-- [ ] Each page exports proper navigationConfig
-- [ ] Verify auto-discovery picks up all pages
-
-**✅ Success Criteria**: Pages render, navigation configs work, auto-discovery functional
+**✅ Success Criteria**:
+- Theme switching works across all 48 variants
+- Settings persist across app restarts
+- All form controls functional
+- Settings page under 100 lines (orchestration only)
 
 ---
 
-### Phase 8: Tab Management System (CORE FEATURE)
-**Goal**: Complete tab system with open/close/reorder functionality  
-**Time Estimate**: 40 minutes
+### **Phase 3: Monaco Code Editor Integration** 📝 (23 mins)
+**Goal**: Complete Monaco editor integration with syntax highlighting
 
-**📋 Related Documentation:**
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Tab system architecture
-- [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - State persistence patterns
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Custom hook patterns and state management
+**📂 Focus**: `/components/features/editor/` Monaco integration
 
-**🎯 Single Feature**: Tab management
+**📋 Tasks**:
+- [ ] Implement Monaco wrapper with TypeScript support
+- [ ] Add JavaScript/TypeScript syntax highlighting
+- [ ] Create editor toolbar with basic actions
+- [ ] Add line numbers, minimap, and editor options
+- [ ] Implement theme-aware editor styling
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/services/tabService.ts` - Tab state management
-- [ ] Create `/src/hooks/useTabs.ts` - Tab state hook
-- [ ] Create `/src/components/features/tabbar/TabBar.tsx` - Tab container
-- [ ] Create `/src/components/features/tabbar/TabItem.tsx` - Individual tab
-- [ ] Implement tab persistence to localStorage
-- [ ] Add keyboard shortcuts for tab management
+**🔗 References**:
+- Architecture Guide: Feature component patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md` - 150 line limit)
+- Generated: `/src/components/features/editor/CodeEditor.tsx`
+- Generated: `/src/components/features/editor/EditorControls.tsx`
+- Monaco documentation for TypeScript integration
 
-**✅ Success Criteria**: Tabs open/close/reorder, persist across sessions
-
----
-
-### Phase 9: Settings Infrastructure (CORE FEATURE)
-**Goal**: Complete settings system with persistence  
-**Time Estimate**: 35 minutes
-
-**📋 Related Documentation:**
-- [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - Settings patterns
-- [THEMES_COMPLETE_REFERENCE.md](THEMES_COMPLETE_REFERENCE.md) - Theme selector
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Form patterns and settings components
-
-**🎯 Single Feature**: Settings management
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/hooks/useSettings.ts` - Settings state management
-- [ ] Create `/src/components/features/settings/Settings.tsx` - Main settings UI
-- [ ] Create `/src/components/features/settings/ThemeSelector.tsx` - Theme selection
-- [ ] Implement settings validation and persistence
-- [ ] Add settings export/import functionality
-
-**✅ Success Criteria**: All settings configurable, persist correctly, theme selector works
+**✅ Success Criteria**:
+- Monaco editor renders and accepts input
+- Syntax highlighting works for JS/TS
+- Editor toolbar functional
+- Theme switching affects editor appearance
+- Performance acceptable for large files
 
 ---
 
-### Phase 10: File Service Integration (API INTEGRATION)
-**Goal**: Implement file upload/download with backend integration  
-**Time Estimate**: 35 minutes
+### **Phase 4: File System Operations** 📁 (18 mins)
+**Goal**: Complete file operations with load, save, and recent files
 
-**📋 Related Documentation:**
-- [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - FileService implementation
-- [Backend API Reference](../../backend/docs/API_REFERENCE.md) - File endpoints
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Service integration and error handling
+**📂 Focus**: File service integration and file operations
 
-**🎯 Single Feature**: File management API integration
+**📋 Tasks**:
+- [ ] Implement file loading via drag & drop and file picker
+- [ ] Add file saving with format selection
+- [ ] Create recent files tracking and management
+- [ ] Add file validation and error handling
+- [ ] Implement auto-save functionality
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/services/fileService.ts` - File operations service
-- [ ] Create `/src/hooks/useFileOperations.ts` - File operations hook
-- [ ] Implement file upload with progress tracking
-- [ ] Add file download functionality
-- [ ] Implement proper error handling and user feedback
+**🔗 References**:
+- Architecture Guide: Service layer for file operations (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/fileService.ts`
+- Generated: `/src/hooks/useFileOperations.ts`
+- Electron API for file system access
 
-**✅ Success Criteria**: Files upload/download correctly, progress shown, errors handled
-
----
-
-### Phase 11: Monaco Editor Integration (CORE FEATURE)
-**Goal**: Add Monaco editor for code editing  
-**Time Estimate**: 30 minutes
-
-**📋 Related Documentation:**
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Editor component specs
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Editor accessibility
-
-**🎯 Single Feature**: Code editor
-
-**🔧 Implementation Tasks:**
-- [ ] Install and configure Monaco Editor for React
-- [ ] Create `/src/components/features/editor/CodeEditor.tsx` - Monaco wrapper
-- [ ] Implement syntax highlighting for JavaScript/TypeScript
-- [ ] Apply theme variables to Monaco editor
-- [ ] Add keyboard shortcuts and accessibility features
-
-**✅ Success Criteria**: Monaco editor works, themes apply, syntax highlighting functional
+**✅ Success Criteria**:
+- File loading works via multiple methods
+- File saving preserves formatting
+- Recent files tracked correctly
+- Error handling for invalid files
+- Auto-save prevents data loss
 
 ---
 
-### Phase 12: Deobfuscation Service Integration (API INTEGRATION)
-**Goal**: Implement deobfuscation API integration  
-**Time Estimate**: 40 minutes
+### **Phase 5: File Tree Explorer** 📂 (13 mins)
+**Goal**: Complete file tree with navigation and file operations
 
-**📋 Related Documentation:**
-- [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - DeobfuscationService implementation
-- [Backend API Reference](../../backend/docs/API_REFERENCE.md) - Deobfuscation endpoints
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Deobfuscation service and custom hooks
+**📂 Focus**: `/components/features/filetree/` and UI FileTree component
 
-**🎯 Single Feature**: Deobfuscation API integration
+**📋 Tasks**:
+- [ ] Implement expandable/collapsible tree structure
+- [ ] Add file type icons and file size display
+- [ ] Create file context menu for operations
+- [ ] Add drag & drop support for file organization
+- [ ] Implement virtual scrolling for large directories
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/services/deobfuscationService.ts` - API integration
-- [ ] Create `/src/hooks/useDeobfuscation.ts` - Deobfuscation state hook
-- [ ] Implement progress tracking for long-running jobs
-- [ ] Add real-time status polling
-- [ ] Implement proper error handling and user feedback
+**🔗 References**:
+- Architecture Guide: Feature component composition patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/features/filetree/TreeNodeComponent.tsx`
+- Generated: `/src/components/features/filetree/FileTreeEmptyState.tsx`
+- Generated: `/src/components/ui/FileTree.tsx`
 
-**✅ Success Criteria**: Deobfuscation requests work, progress tracked, results displayed
-
----
-
-### Phase 13: Main Deobfuscator Interface (FEATURE UI)
-**Goal**: Create main deobfuscation tool interface  
-**Time Estimate**: 35 minutes
-
-**📋 Related Documentation:**
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Feature component architecture
-
-**🎯 Single Feature**: Deobfuscator UI
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/features/deobfuscator/DeobfuscatorMain.tsx` - Main interface
-- [ ] Create `/src/components/features/deobfuscator/ControlPanel.tsx` - Options panel
-- [ ] Create `/src/components/features/deobfuscator/ResultsDisplay.tsx` - Results viewer
-- [ ] Integrate Monaco editor for input/output
-- [ ] Add file drag & drop functionality
-
-**✅ Success Criteria**: Complete deobfuscation workflow works end-to-end
+**✅ Success Criteria**:
+- File tree renders with proper hierarchy
+- Expand/collapse functionality works
+- File operations (rename, delete) functional
+- Performance good with 1000+ files
+- Keyboard navigation complete
 
 ---
 
-### Phase 14: Analysis Service Integration (API INTEGRATION)
-**Goal**: Implement code analysis API integration  
-**Time Estimate**: 30 minutes
+### **Phase 6: Tab System Enhancement** 🗂️ (10 mins)
+**Goal**: Complete tab management with reordering and persistence
 
-**📋 Related Documentation:**
-- [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - AnalysisService implementation
-- [Backend API Reference](../../backend/docs/API_REFERENCE.md) - Analysis endpoints
+**📂 Focus**: `/components/features/tabbar/` and tab management
 
-**🎯 Single Feature**: Code analysis API
+**📋 Tasks**:
+- [ ] Implement tab drag & drop reordering
+- [ ] Add tab close buttons with confirmation
+- [ ] Create tab overflow handling with scroll controls
+- [ ] Add tab persistence across app sessions
+- [ ] Implement tab context menu
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/services/analysisService.ts` - Analysis API integration
-- [ ] Create `/src/hooks/useCodeAnalysis.ts` - Analysis state hook
-- [ ] Implement security scanning integration
-- [ ] Add complexity analysis features
-- [ ] Create analysis results display
+**🔗 References**:
+- Architecture Guide: Component composition for complex interactions (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/features/tabbar/TabBarScrollable.tsx`
+- Generated: `/src/components/features/tabbar/TabBarControls.tsx`
+- Generated: `/src/components/features/tabbar/TabItem.tsx`
 
-**✅ Success Criteria**: Code analysis works, security scan functional, results displayed
-
----
-
-### Phase 15: Search System Implementation (CORE FEATURE)
-**Goal**: Global spotlight search functionality  
-**Time Estimate**: 35 minutes
-
-**📋 Related Documentation:**
-- [PROJECT_STRUCTURE.md](PROJECT_STRUCTURE.md) - Search architecture
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Modal and search patterns
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Spotlight search and keyboard navigation
-
-**🎯 Single Feature**: Global search
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/services/searchService.ts` - Search functionality
-- [ ] Create `/src/components/features/search/SpotlightSearch.tsx` - Search modal
-- [ ] Create `/src/hooks/useSpotlightSearch.ts` - Search state management
-- [ ] Implement fuzzy search with relevance scoring
-- [ ] Add keyboard shortcuts (Ctrl+K) and navigation
-
-**✅ Success Criteria**: Global search works, keyboard accessible, results accurate
+**✅ Success Criteria**:
+- Tab reordering works smoothly
+- Tab overflow handles gracefully
+- Tab persistence functional
+- Close confirmations work
+- No memory leaks with many tabs
 
 ---
 
-### Phase 16: Notification System (CORE FEATURE)
-**Goal**: Toast notifications for user feedback  
-**Time Estimate**: 25 minutes
+### **Phase 7: Backend API Integration** 🔗 (23 mins)
+**Goal**: Connect to deobfuscation backend APIs
 
-**📋 Related Documentation:**
-- [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md) - Toast service patterns
+**📂 Focus**: Backend service integration and API communication
 
-**🎯 Single Feature**: Toast notifications
+**📋 Tasks**:
+- [ ] Implement API client for deobfuscation engines
+- [ ] Add request/response type definitions
+- [ ] Create error handling for API failures
+- [ ] Add retry logic and timeout handling
+- [ ] Implement progress tracking for long operations
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/ui/Toast.tsx` - Toast component
-- [ ] Create `/src/components/features/notifications/ToastContainer.tsx` - Container
-- [ ] Create `/src/hooks/useToast.ts` - Toast management hook
-- [ ] Implement success, error, warning, info variants
-- [ ] Add automatic dismissal and positioning
+**🔗 References**:
+- Architecture Guide: Service layer patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/deobfuscationService.ts`
+- Generated: `/src/types/api.ts`
+- Backend API documentation
 
-**✅ Success Criteria**: Toasts display correctly, auto-dismiss, positioned properly
-
----
-
-### Phase 17: Error Boundaries System (RELIABILITY)
-**Goal**: Comprehensive error handling and recovery  
-**Time Estimate**: 25 minutes
-
-**📋 Related Documentation:**
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Error handling requirements
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Error boundary patterns
-
-**🎯 Single Feature**: Error boundaries
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/ui/ErrorBoundary.tsx` - React error boundary
-- [ ] Add error boundaries to all major layout components
-- [ ] Implement graceful error recovery mechanisms
-- [ ] Create user-friendly error messages
-- [ ] Add error reporting integration
-
-**✅ Success Criteria**: Errors caught gracefully, user-friendly messages, recovery works
+**✅ Success Criteria**:
+- API communication works reliably
+- Error handling graceful
+- Progress tracking functional
+- Timeout handling works
+- Type safety maintained
 
 ---
 
-### Phase 18: Keyboard Shortcuts System (UX ENHANCEMENT)
-**Goal**: Comprehensive keyboard shortcut system  
-**Time Estimate**: 30 minutes
+### **Phase 8: Deobfuscation Engine Core** 🔧 (23 mins)
+**Goal**: Complete main deobfuscation interface and controls
 
-**📋 Related Documentation:**
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Keyboard accessibility requirements
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Keyboard navigation patterns
+**📂 Focus**: `/components/features/deobfuscator/` - core deobfuscation functionality
 
-**🎯 Single Feature**: Keyboard shortcuts
+**📋 Tasks**:
+- [ ] Implement main deobfuscation interface
+- [ ] Create control panel with deobfuscation options
+- [ ] Add results display with before/after comparison
+- [ ] Integrate with backend deobfuscation engines
+- [ ] Add progress tracking and cancellation
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/services/keyboardService.ts` - Shortcut management
-- [ ] Create `/src/hooks/useKeyboardShortcuts.ts` - Shortcut hook
-- [ ] Implement context-sensitive shortcuts for each page
-- [ ] Add shortcut help overlay
-- [ ] Configure accessibility-compliant navigation
+**🔗 References**:
+- Architecture Guide: Feature component patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/features/deobfuscator/DeobfuscatorMain.tsx`
+- Generated: `/src/components/features/deobfuscator/ControlPanel.tsx`
+- Generated: `/src/components/features/deobfuscator/ResultsDisplay.tsx`
 
-**✅ Success Criteria**: All features keyboard accessible, shortcuts work, help available
+**✅ Success Criteria**:
+- Deobfuscation process works end-to-end
+- Progress tracking functional
+- Results display correctly formatted
+- Error handling graceful
+- Performance acceptable for large files
 
 ---
 
-### Phase 19: Performance Optimization (OPTIMIZATION)
-**Goal**: Optimize performance and bundle size  
-**Time Estimate**: 30 minutes
+### **Phase 9: Code Comparison & Diff View** 🔍 (18 mins)
+**Goal**: Complete side-by-side code comparison with diff highlighting
 
-**📋 Related Documentation:**
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Performance requirements
+**📂 Focus**: `/components/features/comparison/` - before/after comparison
 
-**🎯 Single Feature**: Performance optimization
+**📋 Tasks**:
+- [ ] Implement side-by-side diff viewer
+- [ ] Add diff highlighting with additions/deletions
+- [ ] Create comparison statistics display
+- [ ] Add sync scrolling between panels
+- [ ] Implement comparison export functionality
 
-**🔧 Implementation Tasks:**
-- [ ] Implement code splitting for major features
-- [ ] Add lazy loading for heavy components
-- [ ] Optimize bundle size and dependencies
+**🔗 References**:
+- Architecture Guide: Component composition patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/features/comparison/CodeComparison.tsx`
+- Generated: `/src/components/features/comparison/DiffViewer.tsx`
+- Generated: `/src/components/features/comparison/ComparisonStats.tsx`
+
+**✅ Success Criteria**:
+- Diff highlighting accurate and clear
+- Sync scrolling works smoothly
+- Statistics calculations correct
+- Export functionality complete
+- Performance good with large diffs
+
+---
+
+### **Phase 10: Security Analysis System** 🛡️ (20 mins)
+**Goal**: Complete security analysis with threat detection and reporting
+
+**📂 Focus**: `/components/features/security/` - security analysis features
+
+**📋 Tasks**:
+- [ ] Implement security analysis interface
+- [ ] Create threat indicator components
+- [ ] Add security report generation
+- [ ] Integrate with backend security scanners
+- [ ] Add severity-based threat categorization
+
+**🔗 References**:
+- Architecture Guide: Service layer integration (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/features/security/SecurityAnalysis.tsx`
+- Generated: `/src/components/features/security/ThreatIndicator.tsx`
+- Generated: `/src/components/features/security/SecurityReport.tsx`
+
+**✅ Success Criteria**:
+- Security analysis runs successfully
+- Threat detection accurate
+- Reports generate correctly
+- Severity indicators clear
+- Export functionality works
+
+---
+
+### **Phase 11: Project & Workspace Management** 📋 (18 mins)
+**Goal**: Complete project management with workspaces and sessions
+
+**📂 Focus**: Project service and workspace management
+
+**📋 Tasks**:
+- [ ] Implement project creation and loading
+- [ ] Add workspace session persistence
+- [ ] Create project settings and configuration
+- [ ] Add project file organization
+- [ ] Implement project export/import
+
+**🔗 References**:
+- Architecture Guide: Service layer patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/projectService.ts`
+- Generated: `/src/hooks/useProject.ts`
+
+**✅ Success Criteria**:
+- Project creation/loading works
+- Session persistence functional
+- Project settings saved
+- File organization works
+- Export/import complete
+
+---
+
+### **Phase 12: Keyboard Shortcuts System** ⌨️ (15 mins)
+**Goal**: Complete keyboard shortcut system with customization
+
+**📂 Focus**: Keyboard service and shortcut management
+
+**📋 Tasks**:
+- [ ] Implement global keyboard shortcut system
+- [ ] Add shortcut customization interface
+- [ ] Create shortcut help overlay
+- [ ] Add context-aware shortcuts
+- [ ] Implement shortcut conflict detection
+
+**🔗 References**:
+- Architecture Guide: Service layer patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/keyboardService.ts`
+- Generated: `/src/hooks/useKeyboardShortcuts.ts`
+- Generated: `/src/config/keyboardConfig.ts`
+
+**✅ Success Criteria**:
+- Global shortcuts work reliably
+- Customization interface functional
+- Help overlay displays correctly
+- Context awareness works
+- Conflict detection prevents issues
+
+---
+
+### **Phase 13: Spotlight Search System** 🔍 (10 mins)
+**Goal**: Complete global search with keyboard shortcuts and navigation
+
+**📂 Focus**: `/components/search/SpotlightSearch.tsx` and search service
+
+**📋 Tasks**:
+- [ ] Implement global search modal
+- [ ] Add search input with auto-complete
+- [ ] Create search results with navigation
+- [ ] Add keyboard shortcuts (Cmd/Ctrl+K)
+- [ ] Implement search empty state
+
+**🔗 References**:
+- Architecture Guide: Modal patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/search/SpotlightSearch.tsx`
+- Generated: `/src/components/features/spotlight-search/SearchInput.tsx`
+- Generated: `/src/components/features/spotlight-search/SearchResults.tsx`
+- Generated: `/src/components/features/spotlight-search/SearchEmptyState.tsx`
+
+**✅ Success Criteria**:
+- Search modal opens with keyboard shortcut
+- Search results accurate and fast
+- Navigation to results works
+- Empty state displays appropriately
+- Modal accessibility complete
+
+---
+
+### **Phase 14: Advanced Editor Features** ✏️ (23 mins)
+**Goal**: Complete advanced editor functionality
+
+**📂 Focus**: Enhanced editor features and operations
+
+**📋 Tasks**:
+- [ ] Implement find and replace functionality
+- [ ] Add multi-cursor editing support
+- [ ] Create code folding and outlining
+- [ ] Add go-to-line and symbol navigation
+- [ ] Implement editor command palette
+
+**🔗 References**:
+- Architecture Guide: Feature component patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Monaco editor documentation for advanced features
+- Generated: `/src/components/features/editor/` components
+
+**✅ Success Criteria**:
+- Find/replace works correctly
+- Multi-cursor editing functional
+- Code folding works
+- Navigation features work
+- Command palette accessible
+
+---
+
+### **Phase 15: Export & Import System** 📤 (15 mins)
+**Goal**: Complete export/import functionality for multiple formats
+
+**📂 Focus**: Export service and format handlers
+
+**📋 Tasks**:
+- [ ] Implement multiple export formats (HTML, PDF, TXT)
+- [ ] Add import functionality for various formats
+- [ ] Create export configuration options
+- [ ] Add batch export capabilities
+- [ ] Implement export progress tracking
+
+**🔗 References**:
+- Architecture Guide: Service layer patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/exportService.ts`
+- Generated: `/src/hooks/useExport.ts`
+
+**✅ Success Criteria**:
+- Multiple export formats work
+- Import functionality complete
+- Configuration options functional
+- Batch export works
+- Progress tracking accurate
+
+---
+
+### **Phase 16: Notifications & Toast System** 📢 (8 mins)
+**Goal**: Complete notification system with toast messages and error handling
+
+**📂 Focus**: `/components/features/notifications/` and UI toast components
+
+**📋 Tasks**:
+- [ ] Implement toast notification system
+- [ ] Add notification types (success, error, warning, info)
+- [ ] Create toast container with positioning
+- [ ] Add auto-dismiss and manual close
+- [ ] Integrate with error boundary system
+
+**🔗 References**:
+- Architecture Guide: UI component patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/features/notifications/ToastContainer.tsx`
+- Generated: `/src/components/features/notifications/ToastItem.tsx`
+- Generated: `/src/components/ui/Toast.tsx`
+
+**✅ Success Criteria**:
+- Toast notifications display correctly
+- All notification types work
+- Auto-dismiss and manual close functional
+- Error notifications integrate with app
+- Accessibility requirements met
+
+---
+
+### **Phase 17: Undo/Redo System** ↩️ (18 mins)
+**Goal**: Complete undo/redo functionality across all operations
+
+**📂 Focus**: History service and state management
+
+**📋 Tasks**:
+- [ ] Implement history tracking service
+- [ ] Add undo/redo for editor operations
+- [ ] Create undo/redo for file operations
+- [ ] Add history persistence across sessions
+- [ ] Implement history limits and cleanup
+
+**🔗 References**:
+- Architecture Guide: Service layer patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/historyService.ts`
+- Generated: `/src/hooks/useHistory.ts`
+
+**✅ Success Criteria**:
+- Undo/redo works for all operations
+- History tracking accurate
+- Persistence across sessions
+- Performance with large histories
+- Memory management works
+
+---
+
+### **Phase 18: Window & Dialog Management** 🪟 (13 mins)
+**Goal**: Complete window management and modal dialogs
+
+**📂 Focus**: Window service and dialog components
+
+**📋 Tasks**:
+- [ ] Implement window state management
+- [ ] Add modal dialog system
+- [ ] Create confirmation dialogs
+- [ ] Add progress dialogs
+- [ ] Implement dialog stacking and focus management
+
+**🔗 References**:
+- Architecture Guide: Modal patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/windowService.ts`
+- Generated: `/src/components/ui/Modal.tsx`
+
+**✅ Success Criteria**:
+- Window state managed correctly
+- Modal dialogs work properly
+- Focus management functional
+- Dialog stacking works
+- Accessibility complete
+
+---
+
+### **Phase 19: Performance Monitoring** 📊 (15 mins)
+**Goal**: Complete performance monitoring and optimization tools
+
+**📂 Focus**: Performance service and monitoring UI
+
+**📋 Tasks**:
+- [ ] Implement performance metrics collection
+- [ ] Add memory usage monitoring
+- [ ] Create performance profiling tools
+- [ ] Add performance alerts and warnings
+- [ ] Implement performance reporting
+
+**🔗 References**:
+- Architecture Guide: Service layer patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/performanceService.ts`
+- Generated: `/src/hooks/usePerformance.ts`
+
+**✅ Success Criteria**:
+- Performance metrics accurate
+- Memory monitoring works
+- Profiling tools functional
+- Alerts trigger correctly
+- Reports generate properly
+
+---
+
+### **Phase 20: Menu System & Application Menu** 📋 (10 mins)
+**Goal**: Complete application menu system with native integration
+
+**📂 Focus**: `/components/menu/` and native menu integration
+
+**📋 Tasks**:
+- [ ] Implement dropdown menu component
+- [ ] Add menu items with actions
+- [ ] Create submenu support
+- [ ] Add context menu integration
+- [ ] Implement native menu integration (Electron)
+
+**🔗 References**:
+- Architecture Guide: UI component patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/menu/MenuButton.tsx`
+- Generated: `/src/components/menu/DropdownMenu.tsx`
+- Generated: `/src/components/menu/MenuItem.tsx`
+- Generated: `/src/components/menu/Submenu.tsx`
+
+**✅ Success Criteria**:
+- Dropdown menus work correctly
+- Submenu navigation functional
+- Context menus integrate well
+- Native menu integration works
+- Accessibility standards met
+
+---
+
+### **Phase 21: Sidebar & Navigation Enhancement** 🧭 (13 mins)
+**Goal**: Complete sidebar with collapsible sections and navigation items
+
+**📂 Focus**: `/components/sidebar/` and navigation components
+
+**📋 Tasks**:
+- [ ] Implement collapsible sidebar sections
+- [ ] Add navigation items with active states
+- [ ] Create settings button integration
+- [ ] Add collapse/expand animations
+- [ ] Implement sidebar item visibility controls
+
+**🔗 References**:
+- Architecture Guide: Layout component patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/sidebar/CollapseButton.tsx`
+- Generated: `/src/components/sidebar/NavigationItems.tsx`
+- Generated: `/src/components/sidebar/NavItem.tsx`
+- Generated: `/src/components/sidebar/SettingsButton.tsx`
+
+**✅ Success Criteria**:
+- Sidebar collapse/expand works smoothly
+- Navigation items highlight correctly
+- Active state management functional
+- Animations respect reduced motion
+- Responsive behavior appropriate
+
+---
+
+### **Phase 22: Electron Integration & Native Features** ⚡ (23 mins)
+**Goal**: Complete Electron integration with native desktop features
+
+**📂 Focus**: Electron main process and native feature integration
+
+**📋 Tasks**:
+- [ ] Implement native file dialogs
+- [ ] Add native notifications
+- [ ] Create native menu integration
+- [ ] Add window controls (minimize, maximize, close)
+- [ ] Implement native keyboard shortcuts
+
+**🔗 References**:
+- Architecture Guide: Platform abstraction (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/platformService.ts`
+- Electron documentation for native features
+
+**✅ Success Criteria**:
+- Native file dialogs work
+- Native notifications display
+- Native menus functional
+- Window controls work
+- Native shortcuts work
+
+---
+
+### **Phase 23: Theme System Enhancement** 🎨 (15 mins)
+**Goal**: Complete advanced theming with custom theme creation
+
+**📂 Focus**: Advanced theme functionality and customization
+
+**📋 Tasks**:
+- [ ] Implement custom theme creation
+- [ ] Add theme export/import functionality
+- [ ] Create theme preview system
+- [ ] Add theme validation and error handling
+- [ ] Implement theme marketplace integration
+
+**🔗 References**:
+- Style Guide: Theme system (`/mnt/c/projects/docs/STYLE_GUIDE.md`)
+- Theme Documentation: `/frontend/docs/THEMES_COMPLETE_REFERENCE.md`
+- Generated: `/src/services/themeService.ts`
+
+**✅ Success Criteria**:
+- Custom theme creation works
+- Theme export/import functional
+- Preview system accurate
+- Validation prevents errors
+- Marketplace integration works
+
+---
+
+### **Phase 24: Status Bar & System Information** 📊 (5 mins)
+**Goal**: Complete status bar with system information and process status
+
+**📂 Focus**: `/components/layout/StatusBar.tsx` and system integration
+
+**📋 Tasks**:
+- [ ] Implement status bar with system info
+- [ ] Add process status indicators
+- [ ] Create memory/CPU usage display
+- [ ] Add file information display
+- [ ] Implement status bar toggle
+
+**🔗 References**:
+- Architecture Guide: Layout component patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/layout/StatusBar.tsx`
+
+**✅ Success Criteria**:
+- Status bar displays system information
+- Process status updates in real-time
+- Memory/CPU usage accurate
+- Status bar toggle works
+- Performance monitoring functional
+
+---
+
+### **Phase 25: Plugin & Extension System** 🔌 (23 mins)
+**Goal**: Complete plugin architecture for extensibility
+
+**📂 Focus**: Plugin service and extension management
+
+**📋 Tasks**:
+- [ ] Implement plugin loading system
+- [ ] Add plugin API definitions
+- [ ] Create plugin management interface
+- [ ] Add plugin sandboxing and security
+- [ ] Implement plugin marketplace integration
+
+**🔗 References**:
+- Architecture Guide: Extension patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/pluginService.ts`
+- Generated: `/src/types/plugin.ts`
+
+**✅ Success Criteria**:
+- Plugin loading works securely
+- Plugin API functional
+- Management interface works
+- Security sandboxing effective
+- Marketplace integration complete
+
+---
+
+### **Phase 26: Error Handling & Recovery** 🚨 (15 mins)
+**Goal**: Complete error boundary system with graceful error handling
+
+**📂 Focus**: Error boundaries and error handling throughout the app
+
+**📋 Tasks**:
+- [ ] Implement error boundary components
+- [ ] Add error recovery mechanisms
+- [ ] Create error reporting system
+- [ ] Add fallback UI components
+- [ ] Implement error logging and analytics
+
+**🔗 References**:
+- Architecture Guide: Error handling patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/components/ui/ErrorBoundary.tsx`
+- Generated: `/src/components/ui/ErrorBanner.tsx`
+
+**✅ Success Criteria**:
+- Error boundaries catch and handle errors
+- Fallback UI displays appropriately
+- Error recovery mechanisms work
+- Error logging functional
+- User experience remains smooth
+
+---
+
+### **Phase 27: Help & Documentation System** ❓ (13 mins)
+**Goal**: Complete in-app help and documentation
+
+**📂 Focus**: Help pages and documentation integration
+
+**📋 Tasks**:
+- [ ] Implement help page with searchable content
+- [ ] Add contextual help tooltips
+- [ ] Create keyboard shortcut reference
+- [ ] Add getting started tutorial
+- [ ] Implement help search functionality
+
+**🔗 References**:
+- Architecture Guide: Page component patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/pages/help/HelpPage.tsx`
+- Generated: `/src/pages/help/HelpPanel.tsx`
+
+**✅ Success Criteria**:
+- Help content accessible and searchable
+- Contextual help displays correctly
+- Shortcut reference complete
+- Tutorial guides users effectively
+- Search functionality works
+
+---
+
+### **Phase 28: About & Version Information** ℹ️ (5 mins)
+**Goal**: Complete about page with version and license information
+
+**📂 Focus**: About page and version management
+
+**📋 Tasks**:
+- [ ] Implement about page with version info
+- [ ] Add license and attribution information
+- [ ] Create update notification system
+- [ ] Add system information display
+- [ ] Implement feedback and support links
+
+**🔗 References**:
+- Architecture Guide: Page component patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/pages/about/AboutPage.tsx`
+- Generated: `/src/pages/about/AboutPanel.tsx`
+
+**✅ Success Criteria**:
+- About page displays correct information
+- License information accurate
+- Update notifications work
+- System info display functional
+- Support links accessible
+
+---
+
+### **Phase 29: Performance Optimization & Code Splitting** ⚡ (18 mins)
+**Goal**: Optimize performance with code splitting, lazy loading, and caching
+
+**📂 Focus**: Bundle optimization and performance enhancements
+
+**📋 Tasks**:
+- [ ] Implement code splitting for features
+- [ ] Add lazy loading for components
+- [ ] Optimize bundle size analysis
 - [ ] Add performance monitoring
-- [ ] Implement reduced motion preferences
+- [ ] Implement caching strategies
 
-**✅ Success Criteria**: Fast load times, small bundle size, smooth animations
+**🔗 References**:
+- Architecture Guide: Performance guidelines (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Vite documentation for optimization
+- React.lazy and Suspense patterns
 
----
-
-### Phase 20: Application Menu System (CORE FEATURE)
-**Goal**: Implement MenuButton and dropdown menu system  
-**Time Estimate**: 30 minutes
-
-**📋 Related Documentation:**
-- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - Menu system structure
-
-**🎯 Single Feature**: Application menu
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/menu/MenuButton.tsx` - Main menu trigger
-- [ ] Create `/src/components/menu/DropdownMenu.tsx` - Menu container
-- [ ] Create `/src/components/menu/MenuItem.tsx` - Individual menu item
-- [ ] Create `/src/components/menu/Submenu.tsx` - Nested submenus
-- [ ] Add keyboard navigation for menu items
-
-**✅ Success Criteria**: Application menu functional, keyboard accessible, theme-aware
+**✅ Success Criteria**:
+- Initial bundle size under 1MB
+- Feature modules load on demand
+- Performance metrics tracking
+- No memory leaks detected
+- Lazy loading works smoothly
 
 ---
 
-### Phase 21: Window Controls System (CORE FEATURE)
-**Goal**: Implement native window controls for Electron  
-**Time Estimate**: 25 minutes
+### **Phase 30: Testing & Quality Assurance** 🧪 (23 mins)
+**Goal**: Complete test suite with unit, integration, and e2e tests
 
-**📋 Related Documentation:**
-- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - Window controls
+**📂 Focus**: Comprehensive testing coverage
 
-**🎯 Single Feature**: Window controls
+**📋 Tasks**:
+- [ ] Add unit tests for components
+- [ ] Create integration tests for features
+- [ ] Implement e2e test scenarios
+- [ ] Add performance testing
+- [ ] Create accessibility tests
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/titlebar/WindowControls.tsx` - Control container
-- [ ] Implement minimize, maximize, close buttons
-- [ ] Add platform-specific behavior (Windows/Mac/Linux)
-- [ ] Integrate with Electron window management APIs
-- [ ] Add hover states and accessibility
+**🔗 References**:
+- Architecture Guide: Testing strategy (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Testing framework documentation
 
-**✅ Success Criteria**: Window controls work on all platforms, proper styling
-
----
-
-### Phase 22: App Controls System (CORE FEATURE)
-**Goal**: Theme toggle, sidebar position, search button  
-**Time Estimate**: 30 minutes
-
-**📋 Related Documentation:**
-- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - App controls
-- [Theme Reference](THEMES_COMPLETE_REFERENCE.md) - Theme switching
-
-**🎯 Single Feature**: Application controls
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/titlebar/AppControls.tsx` - Controls container
-- [ ] Implement theme toggle with all 48 variants
-- [ ] Add sidebar position toggle (left/right)
-- [ ] Create search button for spotlight search
-- [ ] Add tooltips and keyboard shortcuts
-
-**✅ Success Criteria**: All app controls functional, theme switching works instantly
+**✅ Success Criteria**:
+- 80%+ test coverage achieved
+- All features covered by tests
+- E2e scenarios working
+- Performance tests passing
+- Accessibility tests automated
 
 ---
 
-### Phase 23: TabBar Drag & Drop System (CORE FEATURE)
-**Goal**: Advanced tab reordering with drag and drop  
-**Time Estimate**: 40 minutes
+### **Phase 31: Security Hardening** 🔐 (18 mins)
+**Goal**: Complete security implementation and hardening
 
-**📋 Related Documentation:**
-- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - TabBar system
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Tab drag & drop patterns
+**📂 Focus**: Security service and vulnerability prevention
 
-**🎯 Single Feature**: Tab drag and drop
+**📋 Tasks**:
+- [ ] Implement input validation and sanitization
+- [ ] Add XSS and injection protection
+- [ ] Create secure file handling
+- [ ] Add security headers and CSP
+- [ ] Implement audit logging
 
-**🔧 Implementation Tasks:**
-- [ ] Install and configure @dnd-kit/core for drag & drop
-- [ ] Create `/src/hooks/useTabBarDragDrop.ts` - Drag logic
-- [ ] Create `/src/hooks/useTabBarScroll.ts` - Scroll management
-- [ ] Implement visual drag overlay
-- [ ] Add scroll controls for tab overflow
+**🔗 References**:
+- Architecture Guide: Security patterns (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Generated: `/src/services/securityService.ts`
 
-**✅ Success Criteria**: Tabs can be reordered by dragging, smooth animations
-
----
-
-### Phase 24: Sidebar Toggle System (CORE FEATURE)
-**Goal**: Collapsible sidebar with expand/collapse  
-**Time Estimate**: 25 minutes
-
-**📋 Related Documentation:**
-- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - Sidebar system
-
-**🎯 Single Feature**: Sidebar collapse
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/sidebar/CollapseButton.tsx` - Toggle button
-- [ ] Implement smooth expand/collapse animations
-- [ ] Add keyboard shortcut for toggle
-- [ ] Preserve state across sessions
-- [ ] Update main content area layout
-
-**✅ Success Criteria**: Sidebar collapses smoothly, state persisted
+**✅ Success Criteria**:
+- Input validation prevents attacks
+- XSS protection effective
+- File handling secure
+- Security headers configured
+- Audit logging functional
 
 ---
 
-### Phase 25: Navigation Context Menu (CORE FEATURE)
-**Goal**: Right-click menu for navigation items  
-**Time Estimate**: 30 minutes
+### **Phase 32: Documentation & Deployment** 📚 (13 mins)
+**Goal**: Complete documentation and prepare for deployment
 
-**📋 Related Documentation:**
-- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - NavItem system
+**📂 Focus**: User documentation and deployment preparation
 
-**🎯 Single Feature**: Navigation context menu
+**📋 Tasks**:
+- [ ] Create user documentation
+- [ ] Add developer setup guides
+- [ ] Prepare deployment configurations
+- [ ] Create release notes
+- [ ] Add troubleshooting guides
 
-**🔧 Implementation Tasks:**
-- [ ] Add context menu to `/src/components/sidebar/NavItem.tsx`
-- [ ] Implement visibility toggle (show/hide nav items)
-- [ ] Add pin/unpin functionality
-- [ ] Create context menu positioning logic
-- [ ] Save preferences to settings
+**🔗 References**:
+- Architecture Guide: Documentation standards (`/mnt/c/projects/docs/ARCHITECTURE_GUIDE.md`)
+- Deployment platform documentation
 
-**✅ Success Criteria**: Context menu works, visibility/pin state persisted
-
----
-
-### Phase 26: Dynamic Side Panel System (CORE FEATURE)
-**Goal**: Auto-loading contextual panels per page  
-**Time Estimate**: 35 minutes
-
-**📋 Related Documentation:**
-- [Layout Architecture Standard](LAYOUT_ARCHITECTURE_STANDARD.md) - SidePanel system
-
-**🎯 Single Feature**: Dynamic panel loading
-
-**🔧 Implementation Tasks:**
-- [ ] Enhance `/src/config/navigationConfig.tsx` with panel detection
-- [ ] Create panel component auto-discovery system
-- [ ] Implement smooth panel transitions
-- [ ] Add panel-specific error boundaries
-- [ ] Create panel resize functionality
-
-**✅ Success Criteria**: Panels load automatically per page, smooth transitions
+**✅ Success Criteria**:
+- User documentation complete
+- Developer guides functional
+- Deployment configs ready
+- Release process documented
+- Troubleshooting guides helpful
 
 ---
 
-### Phase 27: File Tree Explorer (DETOX-TOOL FEATURE)
-**Goal**: File browser for project exploration  
-**Time Estimate**: 40 minutes
+## 📊 Timeline Summary
 
-**📋 Related Documentation:**
-- [Component Architecture Standard](COMPONENT_ARCHITECTURE_STANDARD.md) - Feature components
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Platform integration patterns
+**Total Estimated Time**: 483 minutes (8.1 hours)
 
-**🎯 Single Feature**: File tree explorer
+- **Foundation (Phase 0)**: 5 minutes  
+- **Core UI (Phases 1-6)**: 95 minutes (1.6 hours)
+- **Backend Integration (Phases 7-10)**: 78 minutes (1.3 hours)
+- **Advanced Features (Phases 11-21)**: 175 minutes (2.9 hours)
+- **Platform Integration (Phases 22-25)**: 70 minutes (1.2 hours)
+- **Polish & Production (Phases 26-32)**: 110 minutes (1.8 hours)
 
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/features/file-explorer/FileTree.tsx`
-- [ ] Implement directory browsing and file selection
-- [ ] Add file type icons and syntax detection
-- [ ] Create file context menu (open, analyze, export)
-- [ ] Integrate with deobfuscation workflow
-
-**✅ Success Criteria**: File tree functional, integrates with main workflow
-
----
-
-### Phase 28: Results Comparison System (DETOX-TOOL FEATURE)
-**Goal**: Before/after code comparison  
-**Time Estimate**: 35 minutes
-
-**📋 Related Documentation:**
-- [Component Architecture Standard](COMPONENT_ARCHITECTURE_STANDARD.md) - Feature components
-- [Implementation Examples](IMPLEMENTATION_EXAMPLES.md) - Component composition patterns
-
-**🎯 Single Feature**: Code comparison
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/features/comparison/CodeComparison.tsx`
-- [ ] Implement side-by-side diff view
-- [ ] Add syntax highlighting for differences
-- [ ] Create comparison export functionality
-- [ ] Add statistics (complexity reduction, size changes)
-
-**✅ Success Criteria**: Comparison view works, exports properly
-
----
-
-### Phase 29: Security Analysis Panel (DETOX-TOOL FEATURE)
-**Goal**: Security scanning and vulnerability detection  
-**Time Estimate**: 35 minutes
-
-**📋 Related Documentation:**
-- [Frontend API Guide](FRONTEND_API_GUIDE.md) - Security API integration
-
-**🎯 Single Feature**: Security analysis
-
-**🔧 Implementation Tasks:**
-- [ ] Create `/src/components/features/security/SecurityAnalysis.tsx`
-- [ ] Implement vulnerability scanning UI
-- [ ] Add threat level indicators and warnings
-- [ ] Create security report export
-- [ ] Integrate with backend security analysis APIs
-
-**✅ Success Criteria**: Security analysis functional, reports generated
-
----
-
-### Phase 30: Final Polish & Testing (QUALITY ASSURANCE)
-**Goal**: Final testing, polish, and production readiness  
-**Time Estimate**: 40 minutes
-
-**📋 Related Documentation:**
-- [Style Guide](/mnt/c/projects/docs/STYLE_GUIDE.md) - Quality requirements
-
-**🎯 Single Feature**: Production readiness
-
-**🔧 Implementation Tasks:**
-- [ ] Comprehensive accessibility audit (WCAG 2.1 AA)
-- [ ] Test all 48 theme variants thoroughly
-- [ ] Verify all API integrations work correctly
-- [ ] Test error handling and recovery scenarios
-- [ ] Final build verification and optimization
-- [ ] Test all new features (menu, window controls, drag & drop)
-
-**✅ Success Criteria**: 100% accessibility compliance, all features work, production ready
-
----
-
-## 🛠️ Implementation Guidelines
-
-### Single Feature Rule (MANDATORY)
-Each phase implements **exactly one feature or capability**:
-- ✅ Phase 4: Theme system only
-- ✅ Phase 8: Tab management only  
-- ✅ Phase 12: Deobfuscation API only
-- ✅ Phase 20: Application menu only
-- ✅ Phase 23: Tab drag & drop only
-- ✅ Phase 27: File tree explorer only
-- ❌ Never combine unrelated features in one phase
-
-### Component Size Limits (ENFORCED)
-- **Page Components**: < 100 lines (orchestration only)
-- **Feature Components**: < 150 lines (use composition)
-- **Layout Components**: < 80 lines (focused responsibility)
-- **UI Components**: < 100 lines (pure rendering)
-
-### Quality Gates (MANDATORY)
-**Before proceeding to next phase:**
-1. ✅ All TypeScript errors resolved
-2. ✅ Component size limits respected
-3. ✅ Theme variables used (no hardcoded colors)
-4. ✅ Accessibility requirements met
-5. ✅ Feature works with all 48 theme variants
-
-### API Integration Requirements
-**Phases 10, 12, 14** must follow [FRONTEND_API_GUIDE.md](FRONTEND_API_GUIDE.md):
-- Proper request/response type mapping
-- Comprehensive error handling
-- Progress tracking for long operations
-- User feedback via toast notifications
+**Real project completion: 1-2 working days**
 
 ## 🎯 Success Metrics
 
-### Phase Completion Criteria
-Each phase must achieve 100% of its success criteria before proceeding:
-- **Foundation Phases (1-3)**: Build system, types, services working
-- **Core Feature Phases (4-9)**: Theme system, layout, navigation, tabs, settings
-- **API Integration Phases (10, 12, 14)**: Backend integration working
-- **Feature UI Phases (11, 13, 15-16)**: User interfaces complete
-- **Quality Phases (17-19)**: Error handling, shortcuts, optimization
-- **Desktop App Phases (20-26)**: Menu, window controls, advanced tab features, sidebar features
-- **Detox-Tool Phases (27-29)**: File explorer, comparison, security analysis
-- **Final Phase (30)**: Complete testing and production readiness
+### Technical Metrics
+- [ ] Build time under 30 seconds
+- [ ] Bundle size under 2MB total
+- [ ] 0 TypeScript errors
+- [ ] 80%+ test coverage
+- [ ] 0 accessibility violations
 
-### Overall Success Criteria
-- ✅ All 48 theme variants functional
-- ✅ Complete backend API integration
-- ✅ WCAG 2.1 AA accessibility compliance
-- ✅ All features keyboard accessible
-- ✅ Production-ready build
-- ✅ Comprehensive error handling
+### User Experience Metrics  
+- [ ] All 48 themes working
+- [ ] Keyboard navigation complete
+- [ ] Screen reader compatible
+- [ ] Mobile responsive
+- [ ] Performance Score 90+
 
-This implementation plan ensures systematic, feature-focused development with quality gates at every step.
+### Production Readiness
+- [ ] All features from PROJECT_STRUCTURE.md implemented
+- [ ] Native desktop integration complete
+- [ ] Security hardening implemented
+- [ ] Documentation complete
+- [ ] Deployment ready
+
+---
+
+## 📊 Progress Tracking
+
+| Phase | Feature | Time | Status |
+|-------|---------|------|--------|
+| **0** | Foundation Validation | 5 min | ✅ COMPLETE |
+| **1** | Welcome Page & Navigation | 8 min | 🔄 IN PROGRESS |
+| **2** | Settings System & Theme Management | 15 min | ⬜ PENDING |
+| **3** | Monaco Code Editor Integration | 23 min | ⬜ PENDING |
+| **4** | File System Operations | 18 min | ⬜ PENDING |
+| **5** | File Tree Explorer | 13 min | ⬜ PENDING |
+| **6** | Tab System Enhancement | 10 min | ⬜ PENDING |
+| **7** | Backend API Integration | 23 min | ⬜ PENDING |
+| **8** | Deobfuscation Engine Core | 23 min | ⬜ PENDING |
+| **9** | Code Comparison & Diff View | 18 min | ⬜ PENDING |
+| **10** | Security Analysis System | 20 min | ⬜ PENDING |
+| **11** | Project & Workspace Management | 18 min | ⬜ PENDING |
+| **12** | Keyboard Shortcuts System | 15 min | ⬜ PENDING |
+| **13** | Spotlight Search System | 10 min | ⬜ PENDING |
+| **14** | Advanced Editor Features | 23 min | ⬜ PENDING |
+| **15** | Export & Import System | 15 min | ⬜ PENDING |
+| **16** | Notifications & Toast System | 8 min | ⬜ PENDING |
+| **17** | Undo/Redo System | 18 min | ⬜ PENDING |
+| **18** | Window & Dialog Management | 13 min | ⬜ PENDING |
+| **19** | Performance Monitoring | 15 min | ⬜ PENDING |
+| **20** | Menu System & Application Menu | 10 min | ⬜ PENDING |
+| **21** | Sidebar & Navigation Enhancement | 13 min | ⬜ PENDING |
+| **22** | Electron Integration & Native Features | 23 min | ⬜ PENDING |
+| **23** | Theme System Enhancement | 15 min | ⬜ PENDING |
+| **24** | Status Bar & System Information | 5 min | ⬜ PENDING |
+| **25** | Plugin & Extension System | 23 min | ⬜ PENDING |
+| **26** | Error Handling & Recovery | 15 min | ⬜ PENDING |
+| **27** | Help & Documentation System | 13 min | ⬜ PENDING |
+| **28** | About & Version Information | 5 min | ⬜ PENDING |
+| **29** | Performance Optimization & Code Splitting | 18 min | ⬜ PENDING |
+| **30** | Testing & Quality Assurance | 23 min | ⬜ PENDING |
+| **31** | Security Hardening | 18 min | ⬜ PENDING |
+| **32** | Documentation & Deployment | 13 min | ⬜ PENDING |
+
+**Progress**: 1/32 phases complete (3.1%) • **Next**: Phase 1 Welcome Page
+
+---
+
+**🚀 Ready to continue with Phase 1: Welcome Page & Navigation**
+
+Each phase MUST be 100% complete with all quality gates passed before proceeding to the next phase. No exceptions.
